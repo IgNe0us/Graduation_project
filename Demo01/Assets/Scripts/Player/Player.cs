@@ -131,16 +131,20 @@ public class Player : MonoBehaviour
 
     void MoveSfx()
     {
+        //걷는 소리 효과들
+        //0.5f 는 걷는 소리 간격
         MoveCoolTime = 0.5f;
         if (MoveCurTime <= 0)
         {
-            if(rig.velocity.x != 0)
+            if(rig.velocity.x != 0) // 현재 캐릭터가 움직이고 있으면실행
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
+                    //0.3은 뛰는 소리간격
                     MoveCoolTime = 0.3f;
                 }
                 MoveCurTime = MoveCoolTime;
+                //0,4의 소리를 랜덤하게 재생하여 동일하지않은 사운드를 출력하여 지루하지 않게함.
                 randomWalkSound = Random.Range(0, 4);
                 audioSource.PlayOneShot(audioForestWalk[randomWalkSound]);
             }
