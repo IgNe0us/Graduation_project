@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2643678713472017591}
   m_Layer: 9
   m_Name: Onion
-  m_TagString: Enemy
+  m_TagString: Onion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
 --- !u!114 &2643678713472017595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66501fcfaaf6dcc4994e901bbd2643e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drop_Percentage: 60
   skeletonAnimation: {fileID: 2643678713472017595}
   AnimClip:
   - {fileID: 11400000, guid: 9ae073aea8fa5cb42ad21a4ab7386b02, type: 2}

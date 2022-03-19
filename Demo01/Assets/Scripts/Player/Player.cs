@@ -210,12 +210,26 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Enemy")
+        if(collision.gameObject.tag == "Radish")
         {
             TakeDamage(20 , collision.gameObject);
             PlaySound("DAMAGED");
         }
-
+        else if (collision.gameObject.tag == "Radish")
+        {
+            TakeDamage(25, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "MushRoomBullet")
+        {
+            TakeDamage(30, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "MushRoom")
+        {
+            TakeDamage(20, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
     }
 
     public void TakeDamage(int damage, GameObject go)
@@ -310,7 +324,7 @@ public class Player : MonoBehaviour
                 PlaySound("ATTACK1");
                 foreach (var c in collider2Ds)
                 {
-                    if (c.tag == "Enemy")
+                    if (c.gameObject.layer == 9) // layer 9 = Enemy
                     {
                         c.SendMessage("TakeDamage", damage);
                     }
@@ -325,7 +339,7 @@ public class Player : MonoBehaviour
             PlaySound("ATTACK1");
             foreach (var c in collider2Ds)
             {
-                if (c.tag == "Enemy")
+                if (c.gameObject.layer == 9)
                 {
                     c.SendMessage("TakeDamage", damage);
                 }

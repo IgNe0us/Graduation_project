@@ -5,6 +5,8 @@ using Spine.Unity;
 
 public class Onion : MonoBehaviour
 {
+    //드랍 확율관련
+    public int drop_Percentage;
     //스파인 애니메이션을 위한 것
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
@@ -228,7 +230,10 @@ public class Onion : MonoBehaviour
         {
             player = GameObject.Find("Player").GetComponent<Player>();
             player.money += Random.Range(30, 50);
-            ItemDatabase.instance.ItemDrop(rig.position, 24);
+            if (Random.Range(1, 100) <= drop_Percentage)
+            {
+                ItemDatabase.instance.ItemDrop(gameObject.transform.position, 24);
+            }
             Destroy(gameObject);
         }
     }

@@ -58,7 +58,7 @@ public class Boom : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Platform")
+        if(collision.gameObject.layer == 9 || collision.gameObject.tag == "Platform")
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             _AnimState = AnimState.Boom;

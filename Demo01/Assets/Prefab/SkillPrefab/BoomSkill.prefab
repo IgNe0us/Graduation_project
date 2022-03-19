@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7946375600170491392}
   - component: {fileID: 8279635680286401952}
   - component: {fileID: 8515267909402302625}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BoomSkill
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -141,6 +141,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a77467add781db438a92158184ba99f, type: 2}
   audioBombed: {fileID: 8300000, guid: 0aea49002b7906b4789c62a26aac97a4, type: 3}
   audioBrokenGlass: {fileID: 8300000, guid: 33083615a8f9db043bef0cca285bce87, type: 3}
+  rig: {fileID: 0}
 --- !u!50 &7946375600170491392
 Rigidbody2D:
   serializedVersion: 4
