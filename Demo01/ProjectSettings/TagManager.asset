@@ -9,13 +9,14 @@ TagManager:
   - FieldItem
   - Weapon
   - ChangeStage
-  - Skill
   - Brazier
   - CookingOnBtn
   - Radish
   - Onion
   - MushRoomBullet
   - MushRoom
+  - EnemySkill
+  - PlayerSkill
   layers:
   - Default
   - TransparentFX
@@ -31,8 +32,8 @@ TagManager:
   - PlayerDamaged
   - FieldItem
   - MonsterDamaged
-  - Skill
-  - 
+  - PlayerSkill
+  - EnemySkill
   - 
   - 
   - 

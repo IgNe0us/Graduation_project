@@ -215,7 +215,7 @@ public class Player : MonoBehaviour
             TakeDamage(20 , collision.gameObject);
             PlaySound("DAMAGED");
         }
-        else if (collision.gameObject.tag == "Radish")
+        else if (collision.gameObject.tag == "Onion")
         {
             TakeDamage(25, collision.gameObject);
             PlaySound("DAMAGED");

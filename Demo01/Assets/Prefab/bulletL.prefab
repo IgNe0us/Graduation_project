@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 861592973911582321}
   - component: {fileID: 4238858097924320097}
   - component: {fileID: 6969366411870900443}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: bulletL
   m_TagString: MushRoomBullet
   m_Icon: {fileID: 0}
