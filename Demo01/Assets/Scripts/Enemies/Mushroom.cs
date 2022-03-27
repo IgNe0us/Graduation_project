@@ -33,15 +33,6 @@ public class Mushroom : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         isknockback = false;
-        if (sr.flipX == true)
-        {
-            //왼쪽이면 발사체 왼쪽으로 위치 변경
-            Instantiate(bulletL, posL.position, transform.rotation);
-        }
-        else
-        {
-            Instantiate(bulletR, posR.position, transform.rotation);
-        }
     }
     private void Start()
     {
@@ -55,7 +46,7 @@ public class Mushroom : MonoBehaviour
 
     IEnumerator Attack()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.57f);
         if (sr.flipX == true)
         {
             //왼쪽이면 발사체 왼쪽으로 위치 변경

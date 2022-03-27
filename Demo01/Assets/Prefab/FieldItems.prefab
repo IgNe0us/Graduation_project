@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 541331920342408097}
   - component: {fileID: 6361197756049965558}
   - component: {fileID: 8330090430664739536}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: FieldItems
   m_TagString: FieldItem
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!61 &8330090430664739536
 BoxCollider2D:
   m_ObjectHideFlags: 0

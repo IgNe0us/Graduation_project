@@ -11,7 +11,13 @@ public class TransferMap : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            SceneManager.LoadScene(transferMapName);
+            GameObject.Find("FadeInout").GetComponent<FadeInOut>().FadeButton();
+            Invoke("SceneLoad", 1.3f);
         }
+    }
+
+    void SceneLoad()
+    {
+        SceneManager.LoadScene(transferMapName);
     }
 }

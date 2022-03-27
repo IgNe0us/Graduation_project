@@ -230,6 +230,11 @@ public class Player : MonoBehaviour
             TakeDamage(20, collision.gameObject);
             PlaySound("DAMAGED");
         }
+        else if (collision.gameObject.tag == "Robster")
+        {
+            TakeDamage(40, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
     }
 
     public void TakeDamage(int damage, GameObject go)

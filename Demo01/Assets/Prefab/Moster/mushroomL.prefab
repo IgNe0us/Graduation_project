@@ -163,8 +163,8 @@ MonoBehaviour:
   boxCollider2d: {fileID: 0}
   damage: 20
   damaged: {fileID: 8300000, guid: 06acd22a5568f8541b2a703f9f1a26da, type: 3}
-  bulletL: {fileID: 7004855500066896001, guid: 66d12d4d92eaa374dbe40f2cd6f4becd, type: 3}
-  bulletR: {fileID: 3013916880291477916, guid: 76d1ca78464c13a49a1c8a860dad2458, type: 3}
+  bulletL: {fileID: 8619345661869188549, guid: a398207348460c845bfb27db22e0c6c9, type: 3}
+  bulletR: {fileID: 1989779028867341668, guid: 4f44bb336e94e384f90e24e380e3df9c, type: 3}
 --- !u!82 &7565849900590760421
 AudioSource:
   m_ObjectHideFlags: 0

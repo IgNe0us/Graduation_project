@@ -28,6 +28,7 @@ public class Radish : MonoBehaviour
     public Rigidbody2D rig;
     private int nextMove;
     float nextThinkTime;
+    private int transformChange;
 
     //체력관련
     public int hp = 50;
@@ -51,6 +52,7 @@ public class Radish : MonoBehaviour
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         nextThinkTime = Random.Range(2f, 6f);
         Think();
+        TransformChange();
         isknockback = false;
     }
 
@@ -72,6 +74,11 @@ public class Radish : MonoBehaviour
             Turn();
         }
 
+    }
+    void TransformChange()
+    {
+        transformChange = Random.Range(0, 2);
+        Invoke("TransformChange", nextThinkTime);
     }
 
 
@@ -172,9 +179,31 @@ public class Radish : MonoBehaviour
         }
         isknockback = false;
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (collision.transform.position.x > gameObject.transform.position.x)
+            {
+                nextMove = 1;
+                transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+            }
+            else
+            {
+                nextMove = -1;
+                transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+            }
+            transform.GetComponent<MeshRenderer>().sortingOrder = 2;
+            _AnimState = AnimState.Appear;
+            StartCoroutine("AnimReturn");
+        }
+    }
 
-
-
+    IEnumerator AnimReturn()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _AnimState = AnimState.Idle;
+    }
 
     void Turn()
     {
@@ -192,8 +221,18 @@ public class Radish : MonoBehaviour
         }
         else
         {
-            _AnimState = AnimState.Walk;
-            transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+            if (transformChange == 0)
+            {
+                _AnimState = AnimState.Walk;
+                transform.GetComponent<MeshRenderer>().sortingOrder = 2;
+                transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+            }
+            else
+            {
+                _AnimState = AnimState.Dig;
+                transform.GetComponent<MeshRenderer>().sortingOrder = -1;
+                transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+            }
         }
     }
     void Think()

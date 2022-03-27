@@ -27,6 +27,7 @@ public class Onion : MonoBehaviour
     public Rigidbody2D rig;
     private int nextMove;
     float nextThinkTime;
+    private int transformChange;
 
     //체력관련
     public int hp = 50;
@@ -50,6 +51,7 @@ public class Onion : MonoBehaviour
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         nextThinkTime = Random.Range(2f, 6f);
         Think();
+        TransformChange();
         isknockback = false;
     }
 
@@ -71,6 +73,12 @@ public class Onion : MonoBehaviour
             Turn();
         }
 
+    }
+
+    void TransformChange()
+    {
+        transformChange = Random.Range(0, 2);
+        Invoke("TransformChange", nextThinkTime);
     }
 
 
@@ -172,27 +180,31 @@ public class Onion : MonoBehaviour
         isknockback = false;
     }
 
-    IEnumerator waitForSpawn()
-    {
-        while (Time.timeScale != 1.0f)
-            yield return null;
-        if (hp <= 0)
-        {
-            player.money += Random.Range(30, 50);
-            ItemDatabase.instance.ItemDrop(rig.position, 24);
-            Destroy(gameObject);
-        }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (collision.transform.position.x > gameObject.transform.position.x)
+            {
+                nextMove = 1;
+                transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+            }
+            else
+            {
+                nextMove = -1;
+                transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+            }
+            transform.GetComponent<MeshRenderer>().sortingOrder = 2;
+            _AnimState = AnimState.Appear;
+            StartCoroutine("AnimReturn");
+        }
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator AnimReturn()
     {
-        /*if(collision.tag == "Player")
-        {
-            collision.SendMessage("TakeDamage", 20);
-            StartCoroutine(waitForSpawn());
-        }*/
-
+        yield return new WaitForSeconds(0.5f);
+        _AnimState = AnimState.Idle;
     }
 
 
@@ -206,14 +218,29 @@ public class Onion : MonoBehaviour
 
     void Move()
     {
-        if (nextMove == 0f)
+        if (_AnimState != AnimState.Appear)
         {
-            _AnimState = AnimState.Idle;
-        }
-        else
-        {
-            _AnimState = AnimState.Walk;
-            transform.localScale = new Vector2(nextMove * 0.5f , 0.5f);
+            if (nextMove == 0f)
+            {
+                _AnimState = AnimState.Idle;
+                transform.GetComponent<MeshRenderer>().sortingOrder = 2;
+            }
+            else
+            {
+                if(transformChange == 0)
+                {
+                    _AnimState = AnimState.Walk;
+                    transform.GetComponent<MeshRenderer>().sortingOrder = 2;
+                    transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+                }
+                else
+                {
+                    _AnimState = AnimState.Dig;
+                    transform.GetComponent<MeshRenderer>().sortingOrder = -1;
+                    transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+                }
+                
+            }
         }
     }
     void Think()
