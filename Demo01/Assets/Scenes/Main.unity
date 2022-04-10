@@ -2898,7 +2898,7 @@ GameObject:
   - component: {fileID: 365347594}
   m_Layer: 8
   m_Name: Platforms
-  m_TagString: StonePlatform
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
