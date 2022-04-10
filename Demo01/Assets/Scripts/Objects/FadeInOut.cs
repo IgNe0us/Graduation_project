@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FadeInOut : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class FadeInOut : MonoBehaviour
     }
     public void FadeButton()
     {
-        //button.SetActive(false); 버튼 구현시 사용 / 버튼을 클릭하면 비활성화해줌.
+        //button.SetActive(false);// 버튼 구현시 사용 / 버튼을 클릭하면 비활성화해줌.
         StartCoroutine(FadeIn());
     }
 
