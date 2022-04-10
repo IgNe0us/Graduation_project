@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Spine.Unity;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -52,8 +53,10 @@ public class Player : MonoBehaviour
     public AudioClip audioThrow;
     public AudioClip audioJumpOnGround;
     public AudioClip[] audioForestWalk;
+    public AudioClip[] audioStoneWalk;
     AudioSource audioSource;
     int randomWalkSound;
+
 
 
     void Awake()
@@ -81,6 +84,15 @@ public class Player : MonoBehaviour
             // 벡터는 방향과 크기를 동시에 가지는데 크기(- : 왼 , + : 오)를 구별하기 위하여 단위벡터(1,-1)로 방향을 알수 있도록 단위벡터를 곱함 
             rig.velocity = new Vector2(0.5f * rig.velocity.normalized.x, rig.velocity.y);
         }
+        if(Input.GetAxis("Horizontal") == 0)
+        {
+            rig.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        }
+        else
+        {
+            rig.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
 
         //점프 구현
         Jump();
@@ -124,6 +136,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
     }
 
     float MoveCurTime;
@@ -136,7 +149,19 @@ public class Player : MonoBehaviour
         MoveCoolTime = 0.5f;
         if (MoveCurTime <= 0)
         {
-            if(rig.velocity.x != 0) // 현재 캐릭터가 움직이고 있으면실행
+            if ((rig.velocity.x != 0) && SceneManager.GetActiveScene().name == "Main") // 현재 캐릭터가 움직이고 있으면실행
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    //0.3은 뛰는 소리간격
+                    MoveCoolTime = 0.3f;
+                }
+                MoveCurTime = MoveCoolTime;
+                //0,5의 소리를 랜덤하게 재생하여 동일하지않은 사운드를 출력하여 지루하지 않게함.
+                randomWalkSound = Random.Range(0, 5);
+                audioSource.PlayOneShot(audioStoneWalk[randomWalkSound]);
+            }
+            else if((rig.velocity.x != 0) && SceneManager.GetActiveScene().name == "Forest_1-1")
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
@@ -387,6 +412,8 @@ public class Player : MonoBehaviour
                 PlaySound("JUMP");
             }
         }
+
+
     }
 
     public void HpSystem()
