@@ -17750,7 +17750,7 @@ Transform:
   m_GameObject: {fileID: 753623977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 47.61, y: -5.35, z: -14.742552}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.96086574, y: 0.96086574, z: 0.96086574}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -21737,7 +21737,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.012000024, y: 0.012000024, z: 0}
   m_MaxChunkCount: 16
@@ -22958,6 +22958,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: d11e66e6536c5da47be78b4bc178a4eb, type: 2}
   - m_RefCount: 116
     m_Data: {fileID: 11400000, guid: a54d15f31404db844a78ad30fddd72c2, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 17
     m_Data: {fileID: -9163426285224168042, guid: 714674d2dfbc6514580f14486479f81b,
@@ -22965,6 +22967,8 @@ Tilemap:
   - m_RefCount: 116
     m_Data: {fileID: 7940694260894536507, guid: 3ab4b4b24ad8e444695ba76157cdc176,
       type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 133
     m_Data:
