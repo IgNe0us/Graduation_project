@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class DontDestoryObject : MonoBehaviour
 {
-    public string transferMapName;
     private void Awake()
     {
         var obj = FindObjectsOfType<DontDestoryObject>();

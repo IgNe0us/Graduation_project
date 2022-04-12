@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public int damage;
     bool isknockback;
     bool isHit;
+    bool isSitting;
 
     // 돈 관련
     public int money;
@@ -57,6 +58,12 @@ public class Player : MonoBehaviour
     AudioSource audioSource;
     int randomWalkSound;
 
+    //죽음 관련
+    public GameObject Btn, DiePanel;
+
+    //ESC키 관련
+    public GameObject EscOption;
+    bool trigger;
 
 
     void Awake()
@@ -66,13 +73,19 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         moneyText = GameObject.Find("MoneyText").GetComponent<TextMeshProUGUI>();
         leftRightCheck = true;
+        trigger = false;
     }
 
     void Update()
     {
-
-        playerMoveCheck = Input.GetAxisRaw("Horizontal");
-        _animator.SetFloat("move", Mathf.Abs(playerMoveCheck));
+        if (Input.GetKey(KeyCode.Z))
+        {
+            isSitting = true;
+        }
+        else
+        {
+            isSitting = false;
+        }
         moneyToString = money.ToString();
         moneyText.text = moneyToString; // 머니 텍스트 셋팅 "Money : " + moneyToString;
 
@@ -93,7 +106,6 @@ public class Player : MonoBehaviour
             rig.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-
         //점프 구현
         Jump();
 
@@ -112,12 +124,26 @@ public class Player : MonoBehaviour
         //무브 사운드 구현
         MoveSfx();
 
-        Move();
+        if (!isSitting)
+        {
+            Move();
+        }
+        //죽음 구현 
+        Die();
+
+        //ESC 키 구현
+        Esckey();
+
     }
 
     private void FixedUpdate()
     {
-        rig.velocity = new Vector2(playerMoveCheck * moveSpeed * Time.deltaTime, rig.velocity.y);
+        if (!isSitting) {
+            playerMoveCheck = Input.GetAxisRaw("Horizontal");
+            _animator.SetFloat("move", Mathf.Abs(playerMoveCheck));
+            rig.velocity = new Vector2(playerMoveCheck * moveSpeed * Time.deltaTime, rig.velocity.y);
+        }
+        
 
         if (rig.velocity.y < 0)
         {
@@ -285,7 +311,6 @@ public class Player : MonoBehaviour
             Invoke("OffDamaged", 2);
 
         }
-        //die 함수 만들기.
     }
     IEnumerator HitRoutine()
     {
@@ -311,19 +336,6 @@ public class Player : MonoBehaviour
         }
         isknockback = false;
     }
-
-    public IEnumerator waitForSpawn()
-    {
-        while (Time.timeScale != 1.0f)
-            yield return null;
-        if (curHp <= 0)
-        {
-            //죽음 처리
-        }
-
-    }
-
-
     void OffDamaged()
     {
         gameObject.layer = 10;
@@ -498,7 +510,55 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireCube(attackPoint.position, attackSize);
     }
 
-       
+    void Die()
+    {
+        if(curHp <= 0)
+        {
+            Btn.SetActive(true);
+            DiePanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+    public void Resurrection()
+    {
+        Btn.SetActive(false);
+        DiePanel.SetActive(false);
+        Time.timeScale = 1;
+        curHp = 100;
+        gameObject.transform.position = new Vector2(-11f, -0.45f);
+        SceneManager.LoadScene("Main");
+    }
+
+    void Esckey()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            trigger = !trigger;
+            if (trigger)
+            {
+                DiePanel.SetActive(true);
+                EscOption.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                DiePanel.SetActive(false);
+                EscOption.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
+    }
+    public void reStart()
+    {
+        trigger = false;
+        DiePanel.SetActive(false);
+        EscOption.SetActive(false);
+        Time.timeScale = 1;
+    }
+    public void exit()
+    {
+        Application.Quit();
+    }
 
 
 }

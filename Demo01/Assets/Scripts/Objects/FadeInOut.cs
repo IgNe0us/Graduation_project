@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class FadeInOut : MonoBehaviour
 {
     public Image image;
-    public GameObject button;
     public bool fadeInCheck = false;
 
     private void Update()
@@ -20,7 +19,6 @@ public class FadeInOut : MonoBehaviour
     }
     public void FadeButton()
     {
-        //button.SetActive(false);// 버튼 구현시 사용 / 버튼을 클릭하면 비활성화해줌.
         StartCoroutine(FadeIn());
     }
 
