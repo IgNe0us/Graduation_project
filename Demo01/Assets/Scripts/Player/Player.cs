@@ -404,7 +404,7 @@ public class Player : MonoBehaviour
         //점프 구현
         if (Input.GetKeyDown(KeyCode.C) && jumpCount < 3)
         {
-            if (curEnergy <= 0 && jumpCount != 2)
+            if (curEnergy <= 0 && jumpCount != 2) //curEnergy <= 0 && jumpCount != 2
             {
                 rig.AddForce(Vector2.up * 0.00001f, ForceMode2D.Impulse);
             }
@@ -414,7 +414,7 @@ public class Player : MonoBehaviour
                 rig.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 _animator.Play("jump");
                 PlaySound("JUMP");
-                //curEnergy -= 10; 점프 기력 삭제
+                //curEnergy -= 10;
                 isOnTheGround = false;
             }
             else if (jumpCount == 2)
@@ -525,7 +525,6 @@ public class Player : MonoBehaviour
         DiePanel.SetActive(false);
         Time.timeScale = 1;
         curHp = 100;
-        curEnergy = 100;
         gameObject.transform.position = new Vector2(-11f, -0.45f);
         SceneManager.LoadScene("Main");
     }
