@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0c349c73651846e4bb69d1b197b7557b, type: 2}
+  - {fileID: 2100000, guid: 82a6e1b54eb851e45bf319d270022e6e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: c347a483b0d93db409e1f1290b4db222, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 45a8181e1a462644fb5a540981a3bd20, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 0
   initialFlipX: 1
@@ -158,9 +158,11 @@ MonoBehaviour:
   drop_Percentage: 30
   skeletonAnimation: {fileID: 3836149181527074210}
   AnimClip:
-  - {fileID: 11400000, guid: 72c3c0891c3e498468217cb2a62fd41c, type: 2}
-  - {fileID: 11400000, guid: ceb141040eec8e14aadf36c21f9c0cf0, type: 2}
-  - {fileID: 11400000, guid: aa821edfc8319db43b59bc50ae5cdb7d, type: 2}
+  - {fileID: 11400000, guid: 815bd64374684954b8bf43e3ec82551e, type: 2}
+  - {fileID: 11400000, guid: c68855d6626753249a2e10b93096981c, type: 2}
+  - {fileID: 11400000, guid: c503a1f1a3bc69d4aac9e85c16d9702c, type: 2}
+  - {fileID: 11400000, guid: 9ed067fd2c9529545a8510e1c49a526b, type: 2}
+  - {fileID: 11400000, guid: 661dcf4375e9c0c44862b8e61f1e6d00, type: 2}
   rig: {fileID: 3836149181527074214}
   hp: 200
   damage: 40
@@ -274,7 +276,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.38, y: -0.09}
+  m_Offset: {x: -0.38, y: 0.79}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

@@ -20,6 +20,7 @@ TagManager:
   - Robster
   - StonePlatform
   - ForestPlatform
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,7 @@ TagManager:
   - EnemySkill
   - FieldItem
   - StonePlatform
-  - 
+  - Died
   - 
   - 
   - 

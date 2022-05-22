@@ -15,7 +15,7 @@ public class Radish : MonoBehaviour
     //애니메이션을 위한 이넘
     public enum AnimState
     {
-        Idle, Walk, Dig, Appear
+        Idle, Walk, Dig, Appear, Disappear, Death
     }
 
     //현재 애니메이션 처리가 무엇인지에 대한 변수
@@ -32,11 +32,14 @@ public class Radish : MonoBehaviour
 
     //체력관련
     public int hp = 50;
+    private bool Died = false;
 
     //히트관련
     public BoxCollider2D boxCollider2d;
+    private CapsuleCollider2D CapsuleCollider;
     bool isHit = false;
     bool isknockback;
+    bool isHitting = false;
 
     //데미지
     public int damage;
@@ -50,6 +53,7 @@ public class Radish : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
+        CapsuleCollider = GetComponent<CapsuleCollider2D>();
         nextThinkTime = Random.Range(2f, 6f);
         Think();
         TransformChange();
@@ -64,14 +68,16 @@ public class Radish : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rig.velocity = new Vector2(nextMove, rig.velocity.y);
-
-        Vector2 frontVec = new Vector2(rig.position.x + nextMove * 0.6f, rig.position.y);
-        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
-        if (rayHit.collider == null)
+        if (Died == false)
         {
-            Turn();
+            rig.velocity = new Vector2(nextMove, rig.velocity.y);
+            Vector2 frontVec = new Vector2(rig.position.x + nextMove * 0.3f, rig.position.y);
+            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
+            if (rayHit.collider == null)
+            {
+                Turn();
+            }
         }
 
     }
@@ -119,6 +125,12 @@ public class Radish : MonoBehaviour
             case AnimState.Appear:
                 _AsncAnimation(AnimClip[(int)AnimState.Appear], false, 1f);
                 break;
+            case AnimState.Disappear:
+                _AsncAnimation(AnimClip[(int)AnimState.Disappear], false, 1f);
+                break;
+            case AnimState.Death:
+                _AsncAnimation(AnimClip[(int)AnimState.Death], false, 1f);
+                break;
         }
     }
 
@@ -140,8 +152,10 @@ public class Radish : MonoBehaviour
             hp -= damage;
             PlaySound("DAMAGED");
             player = GameObject.Find("Player").GetComponent<Player>();
-            //피격 애니메이션
+            isHitting = true;
+            _AnimState = AnimState.Death;
             FindObjectOfType<HitStop>().Stop(0.07f);
+            Invoke("HitEnd", 0.5f);
 
             float x = transform.position.x - player.transform.position.x;
             if (x < 0)
@@ -154,6 +168,11 @@ public class Radish : MonoBehaviour
             StartCoroutine(Knockback(x));
             Die();
         }
+    }
+
+    void HitEnd()
+    {
+        isHitting = false;
     }
     IEnumerator HitRoutine()
     {
@@ -215,23 +234,28 @@ public class Radish : MonoBehaviour
 
     void Move()
     {
-        if (nextMove == 0f)
+        if ((_AnimState != AnimState.Appear) && (Died == false) && (isHitting == false))
         {
-            _AnimState = AnimState.Idle;
-        }
-        else
-        {
-            if (transformChange == 0)
+            if (nextMove == 0f)
             {
-                _AnimState = AnimState.Walk;
+                _AnimState = AnimState.Idle;
                 transform.GetComponent<MeshRenderer>().sortingOrder = 2;
-                transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
             }
             else
             {
-                _AnimState = AnimState.Dig;
-                transform.GetComponent<MeshRenderer>().sortingOrder = -1;
-                transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+                if (transformChange == 0)
+                {
+                    _AnimState = AnimState.Walk;
+                    transform.GetComponent<MeshRenderer>().sortingOrder = 2;
+                    transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+                }
+                else
+                {
+                    _AnimState = AnimState.Dig;
+                    transform.GetComponent<MeshRenderer>().sortingOrder = -1;
+                    transform.localScale = new Vector2(nextMove * 0.5f, 0.5f);
+                }
+
             }
         }
     }
@@ -247,13 +271,22 @@ public class Radish : MonoBehaviour
     {
         if (hp <= 0)
         {
-            player = GameObject.Find("Player").GetComponent<Player>();
-            player.money += Random.Range(30, 50);
-            if (Random.Range(1, 100) <= drop_Percentage)
-            {
-                ItemDatabase.instance.ItemDrop(gameObject.transform.position, 20);
-            }
-            Destroy(gameObject);
+            Died = true;
+            rig.constraints = RigidbodyConstraints2D.FreezeAll;
+            _AnimState = AnimState.Disappear;
+            CapsuleCollider.enabled = false;
+            Invoke("Death", 2);
         }
+    }
+
+    private void Death()
+    {
+        player = GameObject.Find("Player").GetComponent<Player>();
+        player.money += Random.Range(30, 50);
+        if (Random.Range(1, 100) <= drop_Percentage)
+        {
+            ItemDatabase.instance.ItemDrop(gameObject.transform.position, 20);
+        }
+        Destroy(gameObject);
     }
 }

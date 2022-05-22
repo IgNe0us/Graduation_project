@@ -14,7 +14,7 @@ public class Onion : MonoBehaviour
     //애니메이션을 위한 이넘
     public enum AnimState
     {
-        Idle,Walk,Dig,Appear
+        Idle,Walk,Dig,Appear,Disappear,Death
     }
 
     //현재 애니메이션 처리가 무엇인지에 대한 변수
@@ -31,11 +31,14 @@ public class Onion : MonoBehaviour
 
     //체력관련
     public int hp = 50;
+    private bool Died = false;
 
     //히트관련
     public BoxCollider2D boxCollider2d;
+    private CapsuleCollider2D CapsuleCollider;
     bool isHit = false;
     bool isknockback;
+    bool isHitting = false;
 
     //데미지
     public int damage;
@@ -49,6 +52,7 @@ public class Onion : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
+        CapsuleCollider = GetComponent<CapsuleCollider2D>();
         nextThinkTime = Random.Range(2f, 6f);
         Think();
         TransformChange();
@@ -63,16 +67,17 @@ public class Onion : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rig.velocity = new Vector2(nextMove, rig.velocity.y);
-
-        Vector2 frontVec = new Vector2(rig.position.x + nextMove * 0.3f, rig.position.y);
-        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
-        if (rayHit.collider == null)
+        if (Died == false)
         {
-            Turn();
+            rig.velocity = new Vector2(nextMove, rig.velocity.y);
+            Vector2 frontVec = new Vector2(rig.position.x + nextMove * 0.3f, rig.position.y);
+            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
+            if (rayHit.collider == null)
+            {
+                Turn();
+            }
         }
-
     }
 
     void TransformChange()
@@ -119,6 +124,12 @@ public class Onion : MonoBehaviour
             case AnimState.Appear:
                 _AsncAnimation(AnimClip[(int)AnimState.Appear], false, 1f);
                 break;
+            case AnimState.Disappear:
+                _AsncAnimation(AnimClip[(int)AnimState.Disappear], false, 1f);
+                break;
+            case AnimState.Death:
+                _AsncAnimation(AnimClip[(int)AnimState.Death], false, 1f);
+                break;
         }
     }
 
@@ -140,20 +151,29 @@ public class Onion : MonoBehaviour
             hp -= damage;
             PlaySound("DAMAGED");
             player = GameObject.Find("Player").GetComponent<Player>();
-                //피격 애니메이션
-                FindObjectOfType<HitStop>().Stop(0.07f);
+            isHitting = true;
+            _AnimState = AnimState.Death;
+            FindObjectOfType<HitStop>().Stop(0.07f);
+            Invoke("HitEnd", 0.5f);
 
-                float x = transform.position.x - player.transform.position.x;
-                if (x < 0)
-                    x = 1;
-                else
-                {
-                    x = -1;
-                }
-                StartCoroutine(HitRoutine());
-                StartCoroutine(Knockback(x));
+            float x = transform.position.x - player.transform.position.x;
+            if (x < 0)
+            {
+                x = 1;
+            }
+            else
+            {
+                x = -1;
+            }
+            StartCoroutine(HitRoutine());
+            StartCoroutine(Knockback(x));
             Die();
         }
+    }
+
+    void HitEnd()
+    {
+        isHitting = false;
     }
     IEnumerator HitRoutine()
     {
@@ -183,7 +203,7 @@ public class Onion : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if ((collision.gameObject.tag == "Player") && (Died == false) && (isHitting == false))
         {
             if (collision.transform.position.x > gameObject.transform.position.x)
             {
@@ -218,7 +238,7 @@ public class Onion : MonoBehaviour
 
     void Move()
     {
-        if (_AnimState != AnimState.Appear)
+        if ((_AnimState != AnimState.Appear) && (Died == false) && (isHitting == false))
         {
             if (nextMove == 0f)
             {
@@ -255,14 +275,23 @@ public class Onion : MonoBehaviour
     {
         if (hp <= 0)
         {
-            player = GameObject.Find("Player").GetComponent<Player>();
-            player.money += Random.Range(30, 50);
-            if (Random.Range(1, 100) <= drop_Percentage)
-            {
-                ItemDatabase.instance.ItemDrop(gameObject.transform.position, 24);
-            }
-            Destroy(gameObject);
+            Died = true;
+            rig.constraints = RigidbodyConstraints2D.FreezeAll;
+            _AnimState = AnimState.Disappear;
+            CapsuleCollider.enabled = false;
+            Invoke("Death", 2);
         }
     }
+    private void Death()
+    {
+        player = GameObject.Find("Player").GetComponent<Player>();
+        player.money += Random.Range(30, 50);
+        if (Random.Range(1, 100) <= drop_Percentage)
+        {
+            ItemDatabase.instance.ItemDrop(gameObject.transform.position, 24);
+        }
+        Destroy(gameObject);
+    }
+
 
 }

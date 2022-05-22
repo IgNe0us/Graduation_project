@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     public Rigidbody2D rig;
     public bool leftRightCheck;
     bool isMoving;
+    bool isLadder = false;
+    CapsuleCollider2D capsuleCollider;
 
     //사운드 관련
     public AudioClip audioJump;
@@ -71,6 +73,7 @@ public class Player : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
         moneyText = GameObject.Find("MoneyText").GetComponent<TextMeshProUGUI>();
         leftRightCheck = true;
         trigger = false;
@@ -210,22 +213,39 @@ public class Player : MonoBehaviour
     {
         Vector3 moveVelocity = Vector3.zero;
 
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        if(!isLadder)
         {
-            moveVelocity = Vector3.left;
+            if (Input.GetAxisRaw("Horizontal") < 0)
+            {
+                capsuleCollider.isTrigger = false;
+                moveVelocity = Vector3.left;
 
-            transform.localScale = new Vector3(-0.65f, 0.65f, 1);
-            //X값 스케일을 -1로 주어 좌우반전
-            leftRightCheck = false;
+                transform.localScale = new Vector3(-0.65f, 0.65f, 1);
+                //X값 스케일을 -1로 주어 좌우반전
+                leftRightCheck = false;
+            }
+            else if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                capsuleCollider.isTrigger = false;
+                moveVelocity = Vector3.right;
+
+                transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                //X값 스케일을 1로 주어 다시 원위치 
+                leftRightCheck = true;
+            }
         }
-        else if (Input.GetAxisRaw("Horizontal") > 0)
+        else
         {
-            moveVelocity = Vector3.right;
-
-            transform.localScale = new Vector3(0.65f, 0.65f, 1);
-            //X값 스케일을 1로 주어 다시 원위치 
-            leftRightCheck = true;
+            if (Input.GetAxisRaw("Vertical") < 0 && isLadder == true)
+            {
+                moveVelocity = Vector3.down;
+            }
+            else if (Input.GetAxisRaw("Vertical") > 0 && isLadder == true)
+            {
+                moveVelocity = Vector3.up;
+            }
         }
+        
         transform.position += moveVelocity * moveSpeed * Time.deltaTime;
 
     }
@@ -288,15 +308,32 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ladder" && Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+        {
+            Debug.Log("true");
+            isLadder = true;
+            _animator.Play("ladder");
+            rig.gravityScale = 0f;
+            capsuleCollider.isTrigger = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isLadder = false;
+        Debug.Log("false");
+        rig.gravityScale = 3.5f;
+        capsuleCollider.isTrigger = false;
+    }
+
     public void TakeDamage(int damage, GameObject go)
     {
-
-
         if (!isHit)
         {
             gameObject.layer = 11;
             curHp -= damage;
-            //피격 애니메이션
+            _animator.Play("hurt");
             FindObjectOfType<HitStop>().Stop(0.05f);
 
             float x = transform.position.x - go.transform.position.x;
@@ -308,7 +345,7 @@ public class Player : MonoBehaviour
             }
             StartCoroutine(HitRoutine());
             StartCoroutine(Knockback(x));
-            Invoke("OffDamaged", 2);
+            Invoke("OffDamaged", 1);
 
         }
     }
@@ -361,6 +398,7 @@ public class Player : MonoBehaviour
             //공격
             if (Input.GetKeyDown(KeyCode.X))
             {
+                capsuleCollider.isTrigger = false;
                 curTime = coolTime;
                 _animator.Play("attack1");
                 PlaySound("ATTACK1");
@@ -410,6 +448,8 @@ public class Player : MonoBehaviour
             }
             else if (jumpCount == 1)
             {
+                isLadder = false;
+                capsuleCollider.isTrigger = false;
                 jumpCount += 1;
                 rig.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 _animator.Play("jump");

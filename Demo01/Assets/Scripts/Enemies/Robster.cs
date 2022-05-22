@@ -14,7 +14,7 @@ public class Robster : MonoBehaviour
     //애니메이션을 위한 이넘
     public enum AnimState
     {
-        Idle, Walk, Attack
+        Idle, Walk, Attack, Disappear, Death
     }
 
     //현재 애니메이션 처리가 무엇인지에 대한 변수
@@ -35,9 +35,12 @@ public class Robster : MonoBehaviour
     //public BoxCollider2D boxCollider2d;
     bool isHit = false;
     bool isknockback;
+    bool isHitting = false;
 
     //데미지
+    BoxCollider2D boxCollider;
     public int damage;
+    private bool Died = false;
 
     //오디오 관련
     AudioSource audioSource;
@@ -49,6 +52,7 @@ public class Robster : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
+        boxCollider = GetComponent<BoxCollider2D>();
         nextThinkTime = Random.Range(2f, 6f);
         Think();
         isknockback = false;
@@ -134,6 +138,12 @@ public class Robster : MonoBehaviour
             case AnimState.Attack:
                 _AsncAnimation(AnimClip[(int)AnimState.Attack], false, 1f);
                 break;
+            case AnimState.Disappear:
+                _AsncAnimation(AnimClip[(int)AnimState.Disappear], false, 1f);
+                break;
+            case AnimState.Death:
+                _AsncAnimation(AnimClip[(int)AnimState.Death], false, 1f);
+                break;
         }
     }
 
@@ -155,8 +165,10 @@ public class Robster : MonoBehaviour
             hp -= damage;
             PlaySound("DAMAGED");
             player = GameObject.Find("Player").GetComponent<Player>();
-            //피격 애니메이션
+            isHitting = true;
+            _AnimState = AnimState.Death;
             FindObjectOfType<HitStop>().Stop(0.07f);
+            Invoke("HitEnd", 0.5f);
 
             float x = transform.position.x - player.transform.position.x;
             if (x < 0)
@@ -170,6 +182,12 @@ public class Robster : MonoBehaviour
             Die();
         }
     }
+
+    void HitEnd()
+    {
+        isHitting = false;
+    }
+
     IEnumerator HitRoutine()
     {
         yield return new WaitForSeconds(1f);
@@ -206,7 +224,7 @@ public class Robster : MonoBehaviour
 
     void Move()
     {
-        if(_AnimState != AnimState.Attack)
+        if ((_AnimState != AnimState.Attack) && (Died == false) && (isHitting == false))
         {
             if (nextMove == 0f)
             {
@@ -232,13 +250,21 @@ public class Robster : MonoBehaviour
     {
         if (hp <= 0)
         {
-            player = GameObject.Find("Player").GetComponent<Player>();
-            player.money += Random.Range(30, 50); //돈 30~ 50 원 사이로 지급
-            if (Random.Range(1, 100) <= drop_Percentage)
-            {
-                ItemDatabase.instance.ItemDrop(gameObject.transform.position, 6);
-            }
-            Destroy(gameObject);
+            Died = true;
+            rig.constraints = RigidbodyConstraints2D.FreezeAll;
+            _AnimState = AnimState.Disappear;
+            boxCollider.enabled = false;
+            Invoke("Death", 2);
         }
+    }
+    private void Death()
+    {
+        player = GameObject.Find("Player").GetComponent<Player>();
+        player.money += Random.Range(30, 50); //돈 30~ 50 원 사이로 지급
+        if (Random.Range(1, 100) <= drop_Percentage)
+        {
+            ItemDatabase.instance.ItemDrop(gameObject.transform.position, 6);
+        }
+        Destroy(gameObject);
     }
 }
