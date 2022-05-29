@@ -31459,6 +31459,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\uD45C\uC9C0\uD310"
       objectReference: {fileID: 0}
+    - target: {fileID: 1242940112153146567, guid: 8bc9ac5ea60c7a7419785978c12ab39d,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bc9ac5ea60c7a7419785978c12ab39d, type: 3}
 --- !u!1001 &4028826044459549229
@@ -31578,6 +31583,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028826044538993559, guid: e3affbcc476934c4ba98e6bd042b78cd,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4028826044538993644, guid: e3affbcc476934c4ba98e6bd042b78cd,
         type: 3}

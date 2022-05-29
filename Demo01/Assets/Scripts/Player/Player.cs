@@ -124,6 +124,13 @@ public class Player : MonoBehaviour
         //공격 애니메이션
         Attack();
 
+        //사다리 애니메이션
+
+        if (rig.gravityScale == 0f)
+        {
+            _animator.Play("ladder");
+        }
+
         //무브 사운드 구현
         MoveSfx();
 
@@ -310,21 +317,21 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ladder" && Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+        if (collision.gameObject.tag == "Ladder" && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
         {
-            Debug.Log("true");
             isLadder = true;
-            _animator.Play("ladder");
             rig.gravityScale = 0f;
             capsuleCollider.isTrigger = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isLadder = false;
-        Debug.Log("false");
-        rig.gravityScale = 3.5f;
-        capsuleCollider.isTrigger = false;
+        if(isLadder == true)
+        {
+            isLadder = false;
+            rig.gravityScale = 3.5f;
+            capsuleCollider.isTrigger = false;
+        }
     }
 
     public void TakeDamage(int damage, GameObject go)
@@ -398,6 +405,7 @@ public class Player : MonoBehaviour
             //공격
             if (Input.GetKeyDown(KeyCode.X))
             {
+                isLadder = false;
                 capsuleCollider.isTrigger = false;
                 curTime = coolTime;
                 _animator.Play("attack1");

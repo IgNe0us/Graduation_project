@@ -279,7 +279,7 @@ public class Onion : MonoBehaviour
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
             _AnimState = AnimState.Disappear;
             CapsuleCollider.enabled = false;
-            Invoke("Death", 2);
+            Invoke("Death", 1);
         }
     }
     private void Death()

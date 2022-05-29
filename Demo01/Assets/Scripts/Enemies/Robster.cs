@@ -254,7 +254,7 @@ public class Robster : MonoBehaviour
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
             _AnimState = AnimState.Disappear;
             boxCollider.enabled = false;
-            Invoke("Death", 2);
+            Invoke("Death", 1);
         }
     }
     private void Death()
