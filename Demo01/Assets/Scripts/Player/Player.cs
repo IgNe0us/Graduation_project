@@ -406,6 +406,7 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.X))
             {
                 isLadder = false;
+                rig.gravityScale = 3.5f;
                 capsuleCollider.isTrigger = false;
                 curTime = coolTime;
                 _animator.Play("attack1");
@@ -457,6 +458,7 @@ public class Player : MonoBehaviour
             else if (jumpCount == 1)
             {
                 isLadder = false;
+                rig.gravityScale = 3.5f;
                 capsuleCollider.isTrigger = false;
                 jumpCount += 1;
                 rig.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
