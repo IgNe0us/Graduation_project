@@ -2740,7 +2740,7 @@ Transform:
   - {fileID: 93631542}
   - {fileID: 1525541701}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &304305962
 GameObject:
@@ -14747,7 +14747,7 @@ Transform:
   m_Children:
   - {fileID: 2063223608}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &635363982
 GameObject:
@@ -19713,7 +19713,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1616800143}
-        m_MethodName: 
+        m_MethodName: Go_To_Volcano
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30378,7 +30378,7 @@ SpriteRenderer:
   m_Size: {x: 20, y: 12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2069952441
@@ -31526,7 +31526,7 @@ PrefabInstance:
     - target: {fileID: 4028826044538993552, guid: e3affbcc476934c4ba98e6bd042b78cd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4028826044538993552, guid: e3affbcc476934c4ba98e6bd042b78cd,
         type: 3}

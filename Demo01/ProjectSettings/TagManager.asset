@@ -21,6 +21,8 @@ TagManager:
   - StonePlatform
   - ForestPlatform
   - Ladder
+  - Pepper
+  - CornPig
   layers:
   - Default
   - TransparentFX

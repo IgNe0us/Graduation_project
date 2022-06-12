@@ -260,7 +260,7 @@ public class Robster : MonoBehaviour
     private void Death()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
-        player.money += Random.Range(30, 50); //돈 30~ 50 원 사이로 지급
+        player.money += Random.Range(80, 100); //돈 30~ 50 원 사이로 지급
         if (Random.Range(1, 100) <= drop_Percentage)
         {
             ItemDatabase.instance.ItemDrop(gameObject.transform.position, 6);

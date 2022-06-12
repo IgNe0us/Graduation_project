@@ -313,6 +313,16 @@ public class Player : MonoBehaviour
             TakeDamage(40, collision.gameObject);
             PlaySound("DAMAGED");
         }
+        else if (collision.gameObject.tag == "Pepper")
+        {
+            TakeDamage(60, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "CornPig")
+        {
+            TakeDamage(50, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
