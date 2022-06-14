@@ -23,6 +23,7 @@ TagManager:
   - Ladder
   - Pepper
   - CornPig
+  - Volcano
   layers:
   - Default
   - TransparentFX
@@ -43,7 +44,7 @@ TagManager:
   - FieldItem
   - StonePlatform
   - Died
-  - 
+  - Volcano
   - 
   - 
   - 
