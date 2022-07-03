@@ -337,6 +337,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Volcano")
         {
             curHp -= 0.1f;
+            jumpCount = 1;
             // 용암에 들어가면 체력 닳는 것 구현 (수정 예정)
         }
 

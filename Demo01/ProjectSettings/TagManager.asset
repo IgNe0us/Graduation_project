@@ -24,6 +24,7 @@ TagManager:
   - Pepper
   - CornPig
   - Volcano
+  - Died
   layers:
   - Default
   - TransparentFX

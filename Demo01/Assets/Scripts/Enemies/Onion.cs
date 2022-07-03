@@ -153,6 +153,7 @@ public class Onion : MonoBehaviour
             player = GameObject.Find("Player").GetComponent<Player>();
             isHitting = true;
             _AnimState = AnimState.Death;
+            skeletonAnimation.skeleton.SetColor(Color.red);
             FindObjectOfType<HitStop>().Stop(0.07f);
             Invoke("HitEnd", 0.5f);
 
@@ -225,6 +226,7 @@ public class Onion : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         _AnimState = AnimState.Idle;
+        
     }
 
 
@@ -240,6 +242,7 @@ public class Onion : MonoBehaviour
     {
         if ((_AnimState != AnimState.Appear) && (Died == false) && (isHitting == false))
         {
+            skeletonAnimation.skeleton.SetColor(Color.white);
             if (nextMove == 0f)
             {
                 _AnimState = AnimState.Idle;
@@ -278,12 +281,13 @@ public class Onion : MonoBehaviour
             Died = true;
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
             _AnimState = AnimState.Disappear;
-            CapsuleCollider.enabled = false;
-            Invoke("Death", 1);
+            gameObject.tag = "Died";
+            Invoke("Death", 0.5f);
         }
     }
     private void Death()
     {
+
         player = GameObject.Find("Player").GetComponent<Player>();
         player.money += Random.Range(30, 50);
         if (Random.Range(1, 100) <= drop_Percentage)

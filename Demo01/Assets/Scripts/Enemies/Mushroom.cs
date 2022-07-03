@@ -89,6 +89,7 @@ public class Mushroom : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             _AnimState = AnimState.Shoot;
+            skeletonAnimation.skeleton.SetColor(Color.white);
         }
     }
 
@@ -145,6 +146,7 @@ public class Mushroom : MonoBehaviour
             PlaySound("DAMAGED");
             player = GameObject.Find("Player").GetComponent<Player>();
             _AnimState = AnimState.Death;
+            skeletonAnimation.skeleton.SetColor(Color.red);
             StartCoroutine("AnimReturn");
             FindObjectOfType<HitStop>().Stop(0.07f);
             StartCoroutine(HitRoutine());
@@ -180,8 +182,8 @@ public class Mushroom : MonoBehaviour
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
             _AnimState = AnimState.Disappear;
             Died = true;
-            circleCollider.enabled = false;
-            Invoke("Death", 1);
+            gameObject.tag = "Died";
+            Invoke("Death", 0.5f);
         }
     }
     private void Death()

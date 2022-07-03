@@ -167,6 +167,7 @@ public class Robster : MonoBehaviour
             player = GameObject.Find("Player").GetComponent<Player>();
             isHitting = true;
             _AnimState = AnimState.Death;
+            skeletonAnimation.skeleton.SetColor(Color.red);
             FindObjectOfType<HitStop>().Stop(0.07f);
             Invoke("HitEnd", 0.5f);
 
@@ -226,6 +227,7 @@ public class Robster : MonoBehaviour
     {
         if ((_AnimState != AnimState.Attack) && (Died == false) && (isHitting == false))
         {
+            skeletonAnimation.skeleton.SetColor(Color.white);
             if (nextMove == 0f)
             {
                 _AnimState = AnimState.Idle;
@@ -253,7 +255,7 @@ public class Robster : MonoBehaviour
             Died = true;
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
             _AnimState = AnimState.Disappear;
-            boxCollider.enabled = false;
+            gameObject.tag = "Died";
             Invoke("Death", 1);
         }
     }

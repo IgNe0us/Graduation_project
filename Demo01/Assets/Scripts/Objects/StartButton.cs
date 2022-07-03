@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
+    int i = 0;
     public Image image;
     public GameObject button;
     public bool fadeInCheck = false;
+    public GameObject[] prolog = new GameObject[9];
+    public GameObject prologEnd;
+    bool endCheck = false;
 
     private void Update()
     {
@@ -17,12 +21,36 @@ public class StartButton : MonoBehaviour
             StartCoroutine(fadeOut());
             fadeInCheck = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            i++;
+            if(i == 9)
+            {
+                prologEnd.SetActive(false);
+                //SceneLoad();
+                StartCoroutine(FadeIn());
+                Invoke("SceneLoad", 1.3f);
+                endCheck = true;
+            }
+            if (endCheck == false)
+            {
+                prolog[i].SetActive(true);
+                if (i == 8)
+                {
+                    prolog[i].SetActive(true);
+                }
+            }
+        }
     }
     public void FadeButton()
     {
         button.SetActive(false);// 버튼 구현시 사용 / 버튼을 클릭하면 비활성화해줌.
-        StartCoroutine(FadeIn());
-        Invoke("SceneLoad", 1.3f);
+        //StartCoroutine(FadeIn());
+        prolog[0].SetActive(true);
+        // 프롤로그를 보여주고 로드씬
+
+
     }
 
     IEnumerator FadeIn()

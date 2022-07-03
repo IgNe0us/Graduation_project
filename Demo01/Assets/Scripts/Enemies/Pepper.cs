@@ -148,6 +148,7 @@ public class Pepper : MonoBehaviour
             player = GameObject.Find("Player").GetComponent<Player>();
             isHitting = true;
             _AnimState = AnimState.Death;
+            skeletonAnimation.skeleton.SetColor(Color.red);
             FindObjectOfType<HitStop>().Stop(0.07f);
             Invoke("HitEnd", 0.5f);
 
@@ -230,6 +231,7 @@ public class Pepper : MonoBehaviour
     {
         if ((Died == false) && (isHitting == false))  //(_AnimState != AnimState.Appear) && (Died == false) && (isHitting == false) 공격모션 추가되면 추가
         {
+            skeletonAnimation.skeleton.SetColor(Color.white);
             if (nextMove == 0f)
             {
                 _AnimState = AnimState.Idle;
@@ -256,8 +258,8 @@ public class Pepper : MonoBehaviour
             Died = true;
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
             _AnimState = AnimState.Disappear;
-            CapsuleCollider.enabled = false;
-            Invoke("Death", 1);
+            gameObject.tag = "Died";
+            Invoke("Death", 0.5f);
         }
     }
 
