@@ -143,12 +143,11 @@ GameObject:
   - component: {fileID: 4028826044538993558}
   - component: {fileID: 4028826044538993559}
   - component: {fileID: 4028826044538993556}
-  - component: {fileID: 4028826044538993646}
   - component: {fileID: 4028826044538993640}
   - component: {fileID: 5333267636287683891}
   - component: {fileID: 4028826044538993641}
   m_Layer: 10
-  m_Name: Player
+  m_Name: PlayerBackUp
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,25 +376,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.05, y: 2.07}
   m_Size: {x: 1.82, y: 4.1383576}
   m_Direction: 0
---- !u!251 &4028826044538993646
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4028826044538993557}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 0
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!82 &4028826044538993640
 AudioSource:
   m_ObjectHideFlags: 0

@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (!isSitting) {
             playerMoveCheck = Input.GetAxisRaw("Horizontal");
             _animator.SetFloat("move", Mathf.Abs(playerMoveCheck));
@@ -338,7 +339,12 @@ public class Player : MonoBehaviour
         {
             curHp -= 0.1f;
             jumpCount = 1;
-            // 용암에 들어가면 체력 닳는 것 구현 (수정 예정)
+        }
+
+        if (collision.gameObject.tag == "Water")
+        {
+            curHp -= 0.1f;
+            jumpCount = 1;
         }
 
     }

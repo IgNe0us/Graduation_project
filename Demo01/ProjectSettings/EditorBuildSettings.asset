@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Volcano.unity
     guid: ec62e1a75dada674dbf34afa56ef05e0
+  - enabled: 1
+    path: Assets/Scenes/Ocean.unity
+    guid: e9ae1e3521212c04bb2c1ee68a210647
   m_configObjects: {}

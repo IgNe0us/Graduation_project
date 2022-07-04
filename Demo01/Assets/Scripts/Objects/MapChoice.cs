@@ -41,7 +41,7 @@ public class MapChoice : MonoBehaviour
         SceneManager.LoadScene("Volcano");
         Player.transform.position = new Vector2(47f, -6.9f);
     }
-    /*public void Go_To_Ocean()
+    public void Go_To_Ocean()
     {
         GameObject.Find("FadeInout").GetComponent<FadeInOut>().FadeButton();
         Invoke("Ocean", 1.3f);
@@ -51,6 +51,6 @@ public class MapChoice : MonoBehaviour
     {
         SceneManager.LoadScene("Ocean");
         Player.transform.position = new Vector2(47f, -6.9f);
-    }*/
+    }
 
 }

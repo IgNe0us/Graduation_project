@@ -27,6 +27,7 @@ public class Robster : MonoBehaviour
     public Rigidbody2D rig;
     private int nextMove;
     float nextThinkTime;
+    private int transformChange;
 
     //체력관련
     public int hp = 50;
@@ -54,6 +55,7 @@ public class Robster : MonoBehaviour
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         boxCollider = GetComponent<BoxCollider2D>();
         nextThinkTime = Random.Range(2f, 6f);
+        TransformChange();
         Think();
         isknockback = false;
     }
@@ -76,7 +78,11 @@ public class Robster : MonoBehaviour
         {
             Turn();
         }
-
+    }
+    void TransformChange()
+    {
+        transformChange = Random.Range(0, 2);
+        Invoke("TransformChange", nextThinkTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

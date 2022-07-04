@@ -25,6 +25,7 @@ TagManager:
   - CornPig
   - Volcano
   - Died
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -46,8 +47,8 @@ TagManager:
   - StonePlatform
   - Died
   - Volcano
-  - 
-  - 
+  - Water
+  - MonsterWall
   - 
   - 
   - 
