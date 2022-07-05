@@ -262,13 +262,13 @@ public class Robster : MonoBehaviour
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
             _AnimState = AnimState.Disappear;
             gameObject.tag = "Died";
-            Invoke("Death", 1);
+            Invoke("Death", 0.5f);
         }
     }
     private void Death()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
-        player.money += Random.Range(80, 100); //돈 30~ 50 원 사이로 지급
+        player.money += Random.Range(80, 100); 
         if (Random.Range(1, 100) <= drop_Percentage)
         {
             ItemDatabase.instance.ItemDrop(gameObject.transform.position, 6);
