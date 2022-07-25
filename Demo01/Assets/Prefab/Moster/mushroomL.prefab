@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4778162257975034272}
   - component: {fileID: 4778162257975034273}
   m_Layer: 9
-  m_Name: MushroomL
+  m_Name: mushroomL
   m_TagString: MushRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   hp: 90
   drop_Percentage: 50
   rig: {fileID: 4778162257975034274}
-  damage: 20
+  damage: 2
   damaged: {fileID: 8300000, guid: 06acd22a5568f8541b2a703f9f1a26da, type: 3}
   bulletL: {fileID: 7004855500066896001, guid: 66d12d4d92eaa374dbe40f2cd6f4becd, type: 3}
   bulletR: {fileID: 3013916880291477916, guid: 76d1ca78464c13a49a1c8a860dad2458, type: 3}

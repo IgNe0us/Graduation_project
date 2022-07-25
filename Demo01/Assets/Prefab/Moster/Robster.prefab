@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 661dcf4375e9c0c44862b8e61f1e6d00, type: 2}
   rig: {fileID: 3836149181527074214}
   hp: 200
-  damage: 40
+  damage: 4
   damaged: {fileID: 8300000, guid: 06acd22a5568f8541b2a703f9f1a26da, type: 3}
 --- !u!82 &3836149181527074233
 AudioSource:

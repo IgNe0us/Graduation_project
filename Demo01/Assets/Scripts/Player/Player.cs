@@ -29,14 +29,21 @@ public class Player : MonoBehaviour
 
     //HP , Energy 관련
     public Slider hpBar;
-    public float maxHp;
-    public float curHp;
+    private float DotDamage = 0;
+    public int maxHp; // 최대 44
+    public int curHp;
     public Text hpTextBar;
     public Slider energyBar;
     public float maxEnergy;
     public float curEnergy;
     public Text energyTextBar;
     private bool energyDelay;
+    public Image[] HPSystem;
+    public Sprite heart1;
+    public Sprite heart2;
+    public Sprite heart3;
+    public Sprite heart4;
+    private int stackHP; // hp 4 당 스택 1 상승
 
     //애니메이션 콤보관련
     public Animator _animator;
@@ -291,37 +298,37 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == "Radish")
         {
-            TakeDamage(20 , collision.gameObject);
+            TakeDamage(1 , collision.gameObject);
             PlaySound("DAMAGED");
         }
         else if (collision.gameObject.tag == "Onion")
         {
-            TakeDamage(25, collision.gameObject);
+            TakeDamage(1, collision.gameObject);
             PlaySound("DAMAGED");
         }
         else if (collision.gameObject.tag == "MushRoomBullet")
         {
-            TakeDamage(30, collision.gameObject);
+            TakeDamage(3, collision.gameObject);
             PlaySound("DAMAGED");
         }
         else if (collision.gameObject.tag == "MushRoom")
         {
-            TakeDamage(20, collision.gameObject);
+            TakeDamage(2, collision.gameObject);
             PlaySound("DAMAGED");
         }
         else if (collision.gameObject.tag == "Robster")
         {
-            TakeDamage(40, collision.gameObject);
+            TakeDamage(4, collision.gameObject);
             PlaySound("DAMAGED");
         }
         else if (collision.gameObject.tag == "Pepper")
         {
-            TakeDamage(60, collision.gameObject);
+            TakeDamage(5, collision.gameObject);
             PlaySound("DAMAGED");
         }
         else if (collision.gameObject.tag == "CornPig")
         {
-            TakeDamage(50, collision.gameObject);
+            TakeDamage(5, collision.gameObject);
             PlaySound("DAMAGED");
         }
     }
@@ -337,13 +344,23 @@ public class Player : MonoBehaviour
 
         if(collision.gameObject.tag == "Volcano")
         {
-            curHp -= 0.1f;
+            DotDamage += 0.05f;
+            if(DotDamage >= 1)
+            {
+                curHp -= 1;
+                DotDamage = 0;
+            }
             jumpCount = 1;
         }
 
         if (collision.gameObject.tag == "Water")
         {
-            curHp -= 0.1f;
+            DotDamage += 0.05f;
+            if (DotDamage >= 1)
+            {
+                curHp -= 1;
+                DotDamage = 0;
+            }
             jumpCount = 1;
         }
 
@@ -506,7 +523,12 @@ public class Player : MonoBehaviour
     {
         //Player Hp
         //hpTextBar.text = "HP  :      " + curHp + "    /    " + maxHp;
-        hpBar.value = Mathf.Lerp(hpBar.value, curHp / maxHp, Time.deltaTime * 5f);
+        //hpBar.value = Mathf.Lerp(hpBar.value, curHp / maxHp, Time.deltaTime * 5f);
+        if(maxHp > 44)
+        {
+            maxHp = 44; // 44이상으로 체력이 늘어날 수 없게
+        }
+
         if (curHp > maxHp)
         {
             curHp = maxHp;
@@ -516,6 +538,85 @@ public class Player : MonoBehaviour
             curHp = 0;
         }
 
+
+
+        if (curHp < 0)
+        {
+            stackHP = 0;
+        }
+        else if (curHp <= 4 && curHp > 0)
+        {
+            stackHP = 1;
+        }
+        else if (curHp <= 8 && curHp > 4)
+        {
+            stackHP = 2;
+        }
+        else if (curHp <= 12 && curHp > 8)
+        {
+            stackHP = 3;
+        }
+        else if (curHp <= 16 && curHp > 12)
+        {
+            stackHP = 4;
+        }
+        else if (curHp <= 20 && curHp > 16)
+        {
+            stackHP = 5;
+        }
+        else if (curHp <= 24 && curHp > 20)
+        {
+            stackHP = 6;
+        }
+        else if (curHp <= 28 && curHp > 24)
+        {
+            stackHP = 7;
+        }
+        else if (curHp <= 32 && curHp > 28)
+        {
+            stackHP = 8;
+        }
+        else if (curHp <= 36 && curHp > 32)
+        {
+            stackHP = 9;
+        }
+        else if (curHp <= 40 && curHp > 36)
+        {
+            stackHP = 10;
+        }
+        else if (curHp <= 44 && curHp > 40)
+        {
+            stackHP = 11;
+        }
+
+        for (int i = 0; i < HPSystem.Length; i++)
+        {
+            if (i < stackHP)
+            {
+                HPSystem[i].enabled = true;
+            }
+            else
+            {
+                HPSystem[i].enabled = false;
+            }
+        }
+
+        if (curHp == 4 * (stackHP - 1) + 1)
+        {
+            HPSystem[stackHP - 1].sprite = heart4;
+        }
+        else if (curHp == 4 * (stackHP - 1) + 2)
+        {
+            HPSystem[stackHP - 1].sprite = heart3;
+        }
+        else if (curHp == 4 * (stackHP - 1) + 3)
+        {
+            HPSystem[stackHP - 1].sprite = heart2;
+        }
+        else if (curHp == 4 * (stackHP - 1) + 4)
+        {
+            HPSystem[stackHP - 1].sprite = heart1;
+        }
 
         //player energy                         //소수점자리 자르기함수 Mathf.Floor
         //energyTextBar.text = "Energy  :    " + Mathf.Floor(curEnergy) + "  /   " + maxEnergy;
@@ -598,7 +699,11 @@ public class Player : MonoBehaviour
         Btn.SetActive(false);
         DiePanel.SetActive(false);
         Time.timeScale = 1;
-        curHp = 100;
+        curHp = maxHp;
+        for(int i = 0; i < HPSystem.Length; i++)
+        {
+            HPSystem[i].sprite = heart1;
+        }
         gameObject.transform.position = new Vector2(-11f, -0.45f);
         SceneManager.LoadScene("Main");
     }
