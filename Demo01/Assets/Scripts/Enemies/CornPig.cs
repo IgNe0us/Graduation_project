@@ -161,7 +161,10 @@ public class CornPig : MonoBehaviour
                 x = -1;
             }
             StartCoroutine(HitRoutine());
-            StartCoroutine(Knockback(x));
+            if (hp > 10) //죽을 직전 마지막 타격 때 넉백 안함
+            {
+                StartCoroutine(Knockback(x));
+            }
             Die();
         }
     }

@@ -648,11 +648,13 @@ public class Player : MonoBehaviour
         {
             moveSpeed = 0;
             _animator.SetBool("sit", true);
+            capsuleCollider.size = new Vector2(capsuleCollider.size.x, 3f); // 앉으면 콜라이더 작아짐
         }
         else if (Input.GetKeyUp(KeyCode.Z))
         {
             moveSpeed = 5;
             _animator.SetBool("sit", false);
+            capsuleCollider.size = new Vector2(capsuleCollider.size.x, 4.1f); // 일어설 때 콜라이더 원상복구
         }
     }
 
