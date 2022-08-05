@@ -8,6 +8,7 @@ public class Slot : MonoBehaviour, IPointerUpHandler
 {
     public Item item;
     public Image itemIcon;
+    public int itemCount;
     public int slotnum;
 
     public void UpdateSlotUI()

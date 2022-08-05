@@ -28,7 +28,7 @@ public class CookingSystem : MonoBehaviour
     }
     private void LoadedsceneEvent(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name != "Restaurant")
+        if (scene.name == "Main")
         {
             GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().InRestaurant = false;
             cookSystemManagement.transform.GetChild(0).gameObject.SetActive(false);

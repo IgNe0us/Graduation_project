@@ -40,10 +40,12 @@ public class InventoryUI : MonoBehaviour
             if(i < inven.SlotCnt)
             {
                 slots[i].GetComponent<Button>().interactable = true;
+                slots[i].transform.GetChild(0).gameObject.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
             }
             else
             {
                 slots[i].GetComponent<Button>().interactable = false;
+                slots[i].transform.GetChild(0).gameObject.GetComponent<Image>().color = new Color32(157, 157, 157, 255);
             }
         }
     }

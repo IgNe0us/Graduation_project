@@ -7,6 +7,12 @@ public class FieldItems : MonoBehaviour
     public Item item;
     public SpriteRenderer image;
 
+
+    private void Update()
+    {
+        transform.Rotate(new Vector3(0, 100, 0) * Time.deltaTime);
+    }
+
     public void SetItem(Item _item)
     {
         item.itemName = _item.itemName;
