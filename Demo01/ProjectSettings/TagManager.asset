@@ -26,6 +26,8 @@ TagManager:
   - Volcano
   - Died
   - Water
+  - ShopKeeper
+  - SkillMaster
   layers:
   - Default
   - TransparentFX

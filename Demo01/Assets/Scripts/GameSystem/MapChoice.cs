@@ -1,12 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MapChoice : MonoBehaviour
 {
     public GameObject Map;
     public GameObject Player;
+    public bool OceanOn = false;
+    private void Start()
+    {
+        gameObject.transform.GetChild(3).gameObject.GetComponent<Button>().interactable = false;
+        if(OceanOn == true)
+        {
+            gameObject.transform.GetChild(3).gameObject.GetComponent<Button>().interactable = true;
+        }
+    }
     public void Go_To_Forest()
     {
         GameObject.Find("FadeControl").GetComponent<FadeControl>().FadeStart();

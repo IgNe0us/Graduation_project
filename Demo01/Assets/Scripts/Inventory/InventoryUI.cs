@@ -75,6 +75,7 @@ public class InventoryUI : MonoBehaviour
         for(int i = 0; i < inven.items.Count; i++)
         {
             slots[i].item = inven.items[i];
+            slots[i].item.itemCount = inven.items[i].itemCount;
             slots[i].UpdateSlotUI();
         }
     }

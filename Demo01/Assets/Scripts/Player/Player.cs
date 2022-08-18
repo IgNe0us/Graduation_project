@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public int money;
     string moneyToString;
     TextMeshProUGUI moneyText;
+    public Text ShopMoney;
 
     //HP , Energy 관련
     public Slider hpBar;
@@ -74,6 +75,10 @@ public class Player : MonoBehaviour
     public GameObject EscOption;
     bool trigger;
 
+    //UI 관련
+    public GameObject Shopkeeper;
+
+
 
     void Awake()
     {
@@ -98,7 +103,7 @@ public class Player : MonoBehaviour
         }
         moneyToString = money.ToString();
         moneyText.text = moneyToString; // 머니 텍스트 셋팅 "Money : " + moneyToString;
-
+        ShopMoney.text = money.ToString();
 
         //손때면 바로 멈추게
         if (Input.GetButtonUp("Horizontal"))
@@ -349,6 +354,7 @@ public class Player : MonoBehaviour
             {
                 curHp -= 1;
                 DotDamage = 0;
+                PlaySound("DAMAGED");
             }
             jumpCount = 1;
         }
@@ -360,8 +366,19 @@ public class Player : MonoBehaviour
             {
                 curHp -= 1;
                 DotDamage = 0;
+                PlaySound("DAMAGED");
             }
             jumpCount = 1;
+        }
+
+        if(collision.gameObject.tag == "ShopKeeper" && (Input.GetKey(KeyCode.Space)))
+        {
+            Shopkeeper.SetActive(true);
+        }
+
+        if(collision.gameObject.tag == "SkillMaster")
+        {
+
         }
 
     }
@@ -526,9 +543,10 @@ public class Player : MonoBehaviour
         //hpBar.value = Mathf.Lerp(hpBar.value, curHp / maxHp, Time.deltaTime * 5f);
         if(maxHp > 44)
         {
-            maxHp = 44; // 44이상으로 체력이 늘어날 수 없게
+            maxHp = 44; // 최대체력이 44이상으로 체력이 늘어날 수 없게
         }
 
+        //현재 체력이 최대 체력을 넘을 수 없게 // 현재 체력이 0 보다 낮아질 수 없게.
         if (curHp > maxHp)
         {
             curHp = maxHp;

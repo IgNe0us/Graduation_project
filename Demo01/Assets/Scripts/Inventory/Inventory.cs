@@ -48,14 +48,16 @@ public class Inventory : MonoBehaviour
         {
             if(items[i].itemName == item.itemName)
             {
-                GameObject.Find("UI").GetComponent<InventoryUI>().slots[i].transform.GetChild(1).gameObject.GetComponent<Text>().text = (++GameObject.Find("UI").GetComponent<InventoryUI>().slots[i].itemCount).ToString();
+                items[i].itemCount++;
+                GameObject.Find("UI").GetComponent<InventoryUI>().slots[i].transform.GetChild(1).gameObject.GetComponent<Text>().text = items[i].itemCount.ToString();
                 return true;
             }
         }
 
         if (items.Count < SlotCnt)
         {
-            GameObject.Find("UI").GetComponent<InventoryUI>().slots[items.Count].transform.GetChild(1).gameObject.GetComponent<Text>().text = (++GameObject.Find("UI").GetComponent<InventoryUI>().slots[items.Count].itemCount).ToString();
+            item.itemCount++;
+            GameObject.Find("UI").GetComponent<InventoryUI>().slots[items.Count].transform.GetChild(1).gameObject.GetComponent<Text>().text = item.itemCount.ToString();
             items.Add(item);
             if (onChangeItem != null)
                 onChangeItem.Invoke();
@@ -68,8 +70,18 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(int index)
     {
-        items.RemoveAt(index);
-        onChangeItem.Invoke();
+        if(items[index].itemCount > 1)
+        {
+            items[index].itemCount--;
+            GameObject.Find("UI").GetComponent<InventoryUI>().slots[index].transform.GetChild(1).gameObject.GetComponent<Text>().text = items[index].itemCount.ToString();
+            onChangeItem.Invoke();
+        }
+        else
+        {
+            GameObject.Find("UI").GetComponent<InventoryUI>().slots[index].transform.GetChild(1).gameObject.GetComponent<Text>().text = "";
+            items.RemoveAt(index);
+            onChangeItem.Invoke();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

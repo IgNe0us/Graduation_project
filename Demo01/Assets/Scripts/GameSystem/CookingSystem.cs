@@ -31,18 +31,18 @@ public class CookingSystem : MonoBehaviour
         if (scene.name == "Main")
         {
             GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().InRestaurant = false;
-            cookSystemManagement.transform.GetChild(0).gameObject.SetActive(false);
-            cookSystemManagement.transform.GetChild(1).gameObject.SetActive(false);
-            cookSystemManagement.transform.GetChild(2).gameObject.SetActive(false);
-            cookSystemManagement.transform.GetChild(3).gameObject.SetActive(false);
+            for(int i = 0; i < 8; i++)
+            {
+                cookSystemManagement.transform.GetChild(i).gameObject.SetActive(false);
+            }
             GameObject.Find("Resaurant_BackGround").transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (scene.name == "Restaurant")
         {
             GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().InRestaurant = true;
-            cookSystemManagement.transform.GetChild(1).gameObject.SetActive(true);
-            cookSystemManagement.transform.GetChild(2).gameObject.SetActive(true);
-            cookSystemManagement.transform.GetChild(3).gameObject.SetActive(true);
+            cookSystemManagement.transform.GetChild(5).gameObject.SetActive(true);
+            cookSystemManagement.transform.GetChild(6).gameObject.SetActive(true);
+            cookSystemManagement.transform.GetChild(7).gameObject.SetActive(true);
             GameObject.Find("Resaurant_BackGround").transform.GetChild(0).gameObject.SetActive(true);
         }
     }
@@ -62,14 +62,18 @@ public class CookingSystem : MonoBehaviour
             if (rayhit.collider.tag == "Brazier" && Input.GetMouseButtonDown(0))
             {
                 OnOffCheck = !OnOffCheck;
-                cookSystemManagement.transform.GetChild(0).gameObject.SetActive(OnOffCheck);
+                cookSystemManagement.transform.GetChild(cookSystemManagement.GetComponent<MenuControl>().page - 1).gameObject.SetActive(OnOffCheck);
+                cookSystemManagement.transform.GetChild(3).gameObject.SetActive(OnOffCheck);
+                cookSystemManagement.transform.GetChild(4).gameObject.SetActive(OnOffCheck);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Tab) && SceneManager.GetActiveScene().name == "Restaurant")
         {
             OnOffCheck = !OnOffCheck;
-            cookSystemManagement.transform.GetChild(0).gameObject.SetActive(OnOffCheck);
+            cookSystemManagement.transform.GetChild(cookSystemManagement.GetComponent<MenuControl>().page - 1).gameObject.SetActive(OnOffCheck);
+            cookSystemManagement.transform.GetChild(3).gameObject.SetActive(OnOffCheck);
+            cookSystemManagement.transform.GetChild(4).gameObject.SetActive(OnOffCheck);
         }
 
         if (timerOn)
