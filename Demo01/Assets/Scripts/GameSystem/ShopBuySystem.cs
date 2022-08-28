@@ -109,7 +109,6 @@ public class ShopBuySystem : MonoBehaviour
         }
         else
         {
-            // 수중맵을 들어갈수 있게 열림 ( 미구현 )
             GameObject.Find("MapControl").gameObject.transform.GetChild(0).gameObject.GetComponent<MapChoice>().OceanOn = true;
             GameObject.Find("Player").GetComponent<Player>().money -= 3000;
             Snorkel.GetComponent<Button>().interactable = false;

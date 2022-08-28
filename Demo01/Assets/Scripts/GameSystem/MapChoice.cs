@@ -12,7 +12,10 @@ public class MapChoice : MonoBehaviour
     private void Start()
     {
         gameObject.transform.GetChild(3).gameObject.GetComponent<Button>().interactable = false;
-        if(OceanOn == true)
+    }
+    private void Update()
+    {
+        if (OceanOn == true)
         {
             gameObject.transform.GetChild(3).gameObject.GetComponent<Button>().interactable = true;
         }

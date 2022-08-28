@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
 
     //UI 관련
     public GameObject Shopkeeper;
+    public GameObject SKillMaster;
 
 
 
@@ -376,9 +377,9 @@ public class Player : MonoBehaviour
             Shopkeeper.SetActive(true);
         }
 
-        if(collision.gameObject.tag == "SkillMaster")
+        if(collision.gameObject.tag == "SkillMaster" && (Input.GetKey(KeyCode.Space)))
         {
-
+            SKillMaster.SetActive(true);
         }
 
     }
@@ -569,42 +570,79 @@ public class Player : MonoBehaviour
         else if (curHp <= 8 && curHp > 4)
         {
             stackHP = 2;
+            HPSystem[stackHP - 2].sprite = heart1;
         }
         else if (curHp <= 12 && curHp > 8)
         {
             stackHP = 3;
+            for(int i = 2; i< stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
         else if (curHp <= 16 && curHp > 12)
         {
             stackHP = 4;
+            for (int i = 2; i < stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
         else if (curHp <= 20 && curHp > 16)
         {
             stackHP = 5;
+            for (int i = 2; i < stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
         else if (curHp <= 24 && curHp > 20)
         {
             stackHP = 6;
+            for (int i = 2; i < stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
         else if (curHp <= 28 && curHp > 24)
         {
             stackHP = 7;
+            for (int i = 2; i < stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
         else if (curHp <= 32 && curHp > 28)
         {
             stackHP = 8;
+            for (int i = 2; i < stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
         else if (curHp <= 36 && curHp > 32)
         {
             stackHP = 9;
+            for (int i = 2; i < stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
         else if (curHp <= 40 && curHp > 36)
         {
             stackHP = 10;
+            for (int i = 2; i < stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
         else if (curHp <= 44 && curHp > 40)
         {
             stackHP = 11;
+            for (int i = 2; i < stackHP; i++)
+            {
+                HPSystem[stackHP - i].sprite = heart1;
+            }
         }
 
         for (int i = 0; i < HPSystem.Length; i++)

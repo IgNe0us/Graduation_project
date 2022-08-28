@@ -1,11 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControlUI : MonoBehaviour
 {
     public GameObject ControlManual;
     public GameObject RestaurantUpgrade;
+    private void Start()
+    {
+        SceneManager.sceneLoaded += LoadedsceneEvent;
+    }
+
+    private void LoadedsceneEvent(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Main")
+        {
+            RestaurantUpgrade.SetActive(false);
+        }
+    }
 
     public void OpenManual()
     {

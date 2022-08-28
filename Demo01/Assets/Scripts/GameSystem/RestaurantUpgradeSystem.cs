@@ -132,11 +132,11 @@ public class RestaurantUpgradeSystem : MonoBehaviour
     public void Lv2_B_Yes_Button()
     {
         // Lv2_Buy 를 종료하고 Lv2_Final을 킴 그리고 Lv2 외관 내관을 적용 그리고 돈을 지불할 코드 작성.
-        if(GameObject.Find("Player").GetComponent<Player>().money >= 3000)
+        if(GameObject.Find("Player").GetComponent<Player>().money >= 7000)
         {
             Lv2_Buy_Obj.SetActive(false);
             Lv2_final_Obj.SetActive(true);
-            GameObject.Find("Player").GetComponent<Player>().money -= 3000; // 3000원 지불 할 돈 임시로 정해놓음.
+            GameObject.Find("Player").GetComponent<Player>().money -= 7000;
             Lv2_B.SetActive(false); // 묻는 창 종료
         }
         Lv2_B.SetActive(false); // 묻는 창 종료
@@ -182,11 +182,11 @@ public class RestaurantUpgradeSystem : MonoBehaviour
     public void Lv3_B_Yes_Button()
     {
         // Lv3_Buy 를 종료하고 Lv3_Final을 킴 그리고 Lv3 외관 내관을 적용 그리고 돈을 지불할 코드 작성.
-        if (GameObject.Find("Player").GetComponent<Player>().money >= 9000)
+        if (GameObject.Find("Player").GetComponent<Player>().money >= 50000)
         {
             Lv3_Buy_Obj.SetActive(false);
             Lv3_final_Obj.SetActive(true);
-            GameObject.Find("Player").GetComponent<Player>().money -= 9000; // 9000원 지불 할 돈 임시로 정해놓음.
+            GameObject.Find("Player").GetComponent<Player>().money -= 50000;
             Lv3_B.SetActive(false); // 묻는 창 종료
         }
         Lv3_B.SetActive(false); // 묻는 창 종료
