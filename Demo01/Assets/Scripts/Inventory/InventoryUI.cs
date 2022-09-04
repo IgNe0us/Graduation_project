@@ -53,19 +53,19 @@ public class InventoryUI : MonoBehaviour
     public void AddSlot()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
-        if(player.money >= 50)
+        if(player.money >= 500 && inven.SlotCnt <= 19)
         {
-            player.money -= 50;
+            player.money -= 500;
             inven.SlotCnt++;
         }
         else
         {
-            Debug.Log("돈이 부족합니다.");
+            Debug.Log("돈이 없거나 슬롯을 모두 구매하였습니다..");
         }
 
     }
 
-    void RedrawSlotUI()
+    public void RedrawSlotUI()
     {
         for(int i =0; i < slots.Length; i++)
         {

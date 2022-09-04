@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated January 1, 2020. Replaces all prior versions.
+ * Last updated September 24, 2021. Replaces all prior versions.
  *
- * Copyright (c) 2013-2020, Esoteric Software LLC
+ * Copyright (c) 2013-2021, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -209,9 +209,9 @@ namespace Spine.Unity {
 		#region Attachments
 		public static Material GetMaterial (this Attachment a) {
 			object rendererObject = null;
-			var renderableAttachment = a as IHasRendererObject;
+			var renderableAttachment = a as IHasTextureRegion;
 			if (renderableAttachment != null)
-				rendererObject = renderableAttachment.RendererObject;
+				rendererObject = renderableAttachment.Region;
 
 			if (rendererObject == null)
 				return null;
@@ -233,7 +233,7 @@ namespace Spine.Unity {
 			buffer = buffer ?? new Vector2[bufferTargetSize];
 			if (buffer.Length < bufferTargetSize) throw new System.ArgumentException(string.Format("Vector2 buffer too small. {0} requires an array of size {1}. Use the attachment's .WorldVerticesLength to get the correct size.", va.Name, floatsCount), "buffer");
 
-			if (va.Bones == null) {
+			if (va.Bones == null && slot.Deform.Count == 0) {
 				var localVerts = va.Vertices;
 				for (int i = 0; i < bufferTargetSize; i++) {
 					int j = i * 2;
@@ -299,7 +299,6 @@ namespace Spine.Unity {
 
 namespace Spine {
 	using System;
-	using System.Collections.Generic;
 
 	public struct BoneMatrix {
 		public float a, b, c, d, x, y;

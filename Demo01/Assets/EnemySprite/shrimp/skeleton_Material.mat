@@ -20,12 +20,13 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e6bbdb80f8808fd4db27881a3359540f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 38cd3ea58facaa24ebae1c1372061b9d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.1
     - _OutlineMipLevel: 0
+    - _OutlineOpaqueAlpha: 1
     - _OutlineReferenceTexWidth: 1024
     - _OutlineSmoothness: 1
     - _OutlineWidth: 3

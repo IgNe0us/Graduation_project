@@ -447,7 +447,7 @@ public class Player : MonoBehaviour
     IEnumerator EnergyRecovery()
     {
         //Energy Recovery Time
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(10.0f);
         curEnergy += 10;
         energyDelay = false;
     }

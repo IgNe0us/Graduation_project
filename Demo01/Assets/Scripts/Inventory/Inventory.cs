@@ -79,6 +79,9 @@ public class Inventory : MonoBehaviour
         else
         {
             GameObject.Find("UI").GetComponent<InventoryUI>().slots[index].transform.GetChild(1).gameObject.GetComponent<Text>().text = "";
+            GameObject.Find("HotKeyUI").transform.GetChild(0).GetComponent<Text>().text = "x0";
+            GameObject.Find("HotKeyUI").transform.GetChild(1).GetComponent<Text>().text = "x0";
+            GameObject.Find("HotKeyUI").transform.GetChild(2).GetComponent<Text>().text = "x0";
             items.RemoveAt(index);
             onChangeItem.Invoke();
         }
