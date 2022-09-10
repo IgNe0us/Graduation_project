@@ -28,6 +28,7 @@ TagManager:
   - Water
   - ShopKeeper
   - SkillMaster
+  - Table
   layers:
   - Default
   - TransparentFX

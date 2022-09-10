@@ -79,6 +79,9 @@ public class Player : MonoBehaviour
     public GameObject Shopkeeper;
     public GameObject SKillMaster;
 
+    // 씬 체크
+    public bool Main_Scene;
+
 
 
     void Awake()
@@ -90,6 +93,7 @@ public class Player : MonoBehaviour
         moneyText = GameObject.Find("MoneyText").GetComponent<TextMeshProUGUI>();
         leftRightCheck = true;
         trigger = false;
+        Main_Scene = true;
     }
 
     void Update()
@@ -238,21 +242,42 @@ public class Player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
-                capsuleCollider.isTrigger = false;
-                moveVelocity = Vector3.left;
-
-                transform.localScale = new Vector3(-0.65f, 0.65f, 1);
-                //X값 스케일을 -1로 주어 좌우반전
-                leftRightCheck = false;
+                if (Main_Scene)
+                {
+                    capsuleCollider.isTrigger = false;
+                    moveVelocity = Vector3.left;
+                    transform.localScale = new Vector3(-0.65f, 0.65f, 1);
+                    //X값 스케일을 -1로 주어 좌우반전
+                    leftRightCheck = false;
+                }
+                else
+                {
+                    capsuleCollider.isTrigger = false;
+                    moveVelocity = Vector3.left;
+                    transform.localScale = new Vector3(-1.0f, 1.0f, 1);
+                    //X값 스케일을 -1로 주어 좌우반전
+                    leftRightCheck = false;
+                }
+                
             }
             else if (Input.GetAxisRaw("Horizontal") > 0)
             {
-                capsuleCollider.isTrigger = false;
-                moveVelocity = Vector3.right;
-
-                transform.localScale = new Vector3(0.65f, 0.65f, 1);
-                //X값 스케일을 1로 주어 다시 원위치 
-                leftRightCheck = true;
+                if(Main_Scene)
+                {
+                    capsuleCollider.isTrigger = false;
+                    moveVelocity = Vector3.right;
+                    transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    //X값 스케일을 1로 주어 다시 원위치 
+                    leftRightCheck = true;
+                }
+                else
+                {
+                    capsuleCollider.isTrigger = false;
+                    moveVelocity = Vector3.right;
+                    transform.localScale = new Vector3(1.0f, 1.0f, 1);
+                    //X값 스케일을 1로 주어 다시 원위치 
+                    leftRightCheck = true;
+                }
             }
         }
         else
@@ -447,7 +472,7 @@ public class Player : MonoBehaviour
     IEnumerator EnergyRecovery()
     {
         //Energy Recovery Time
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(5.0f);
         curEnergy += 10;
         energyDelay = false;
     }

@@ -19,7 +19,7 @@ public class CookingSystem : MonoBehaviour
     float timer_min;
     float timer = 299; // 타이머 게이지 확인용
     float timer_Max = 299; // 타이머 게이지 확인용
-    bool timerOn = false;
+    public bool timerOn = false;
     private void Start()
     {
         SceneManager.sceneLoaded += LoadedsceneEvent;
@@ -31,14 +31,21 @@ public class CookingSystem : MonoBehaviour
         if (scene.name == "Main")
         {
             GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().InRestaurant = false;
-            for(int i = 0; i < 8; i++)
+            GameObject.Find("Player").GetComponent<Player>().Main_Scene = true;
+            GameObject.Find("Player").GetComponent<Player>().transform.localScale = new Vector3(0.65f, 0.65f, 1);
+            for (int i = 0; i < 8; i++)
             {
                 cookSystemManagement.transform.GetChild(i).gameObject.SetActive(false);
             }
             GameObject.Find("Resaurant_BackGround").transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(false);
+            cookingTimer.text = "0:0";
+            EndOper();
         }
         else if (scene.name == "Restaurant")
         {
+            GameObject.Find("Player").GetComponent<Player>().transform.localScale = new Vector3(-1.0f, 1.0f, 1);
+            GameObject.Find("Player").GetComponent<Player>().Main_Scene = false;
             GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().InRestaurant = true;
             cookSystemManagement.transform.GetChild(5).gameObject.SetActive(true);
             cookSystemManagement.transform.GetChild(6).gameObject.SetActive(true);
@@ -100,6 +107,10 @@ public class CookingSystem : MonoBehaviour
             timer = 299;
             timerOn = false;
             operation_StartBtn.interactable = true;
+            GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find("NpcManager").gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            GameObject.Find("NpcManager").gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(false);
         }
         cookingDay.text = "운영 " + day.ToString() + "일 째";
         cookingTimer.text = timer_min + ":" + Mathf.Round(timer_sec).ToString();
@@ -113,6 +124,23 @@ public class CookingSystem : MonoBehaviour
         timerOn = true;
         day++;
         operation_StartBtn.interactable = false;
+        GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        GameObject.Find("NpcManager").gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        GameObject.Find("NpcManager").gameObject.transform.GetChild(2).gameObject.SetActive(true);
+        GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(true);
+    }
+
+    public void EndOper()
+    {
+        timer_min = 0;
+        timer_sec = 0;
+        timer = 299;
+        timerOn = false;
+        operation_StartBtn.interactable = true;
+        GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        GameObject.Find("NpcManager").gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        GameObject.Find("NpcManager").gameObject.transform.GetChild(2).gameObject.SetActive(false);
+        GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(false);
     }
 
 }

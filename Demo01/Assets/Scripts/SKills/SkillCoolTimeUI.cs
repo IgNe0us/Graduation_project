@@ -16,11 +16,9 @@ public class SkillCoolTimeUI : MonoBehaviour
     float throwCurTime;
     private void Update()
     {
-
-
         //수류탄 쿨타임 3초
         throwCoolTime = 3f; //스킬 쿨타임 표시 시간
-        if (throwCurTime <= 0) // 쿨이 0 초일때 다시 쓸 수 있게
+        if ((throwCurTime <= 0) && (GameObject.Find("Player").GetComponent<Player>().curEnergy >= 0)) // 쿨이 0 초일때 다시 쓸 수 있게
         {
             if (Input.GetKeyDown(KeyCode.A))
             {

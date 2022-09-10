@@ -31,6 +31,7 @@ public class ThrowBomb : MonoBehaviour
         {
             if (player.curEnergy <= 0)
             {
+                return;
                 //에너지가 부족합니다.
             }
             else
