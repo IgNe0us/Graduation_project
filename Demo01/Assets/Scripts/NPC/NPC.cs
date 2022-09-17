@@ -46,7 +46,6 @@ public class NPC : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("1");
                 if (CurFoodName == GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem[0])
                 {
                     if (GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().RestaurantLevel == 1)
@@ -273,7 +272,7 @@ public class NPC : MonoBehaviour
 
     void ThinkFood()
     {
-        RandomFoodIdx = Random.Range(0, 2);  // 0 - 14
+        RandomFoodIdx = Random.Range(0, 14);  // 0 - 14
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Food[RandomFoodIdx];
         CurFoodName = FoodName[RandomFoodIdx];

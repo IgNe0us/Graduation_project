@@ -51,12 +51,8 @@ public class MapControlBox : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(mapControl_Exit == true)
-        {
             mapControl_Exit = false;
             MapControl.transform.GetChild(0).gameObject.SetActive(mapControl_Exit);
             IsOnMap = false;
-        }
-            
     }
 }

@@ -17,8 +17,8 @@ public class CookingSystem : MonoBehaviour
     int day = 0;
     float timer_sec;
     float timer_min;
-    float timer = 299; // 타이머 게이지 확인용
-    float timer_Max = 299; // 타이머 게이지 확인용
+    float timer = 179; // 타이머 게이지 확인용
+    float timer_Max = 179; // 타이머 게이지 확인용
     public bool timerOn = false;
     private void Start()
     {
@@ -104,7 +104,7 @@ public class CookingSystem : MonoBehaviour
         {
             timer_min = 0;
             timer_sec = 0;
-            timer = 299;
+            timer = 179;
             timerOn = false;
             operation_StartBtn.interactable = true;
             GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -118,9 +118,9 @@ public class CookingSystem : MonoBehaviour
     }
     public void TimerOn()
     {
-        timer = 299;
+        timer = 179;
         timer_sec = 59;
-        timer_min = 4;
+        timer_min = 2;
         timerOn = true;
         day++;
         operation_StartBtn.interactable = false;
@@ -134,7 +134,7 @@ public class CookingSystem : MonoBehaviour
     {
         timer_min = 0;
         timer_sec = 0;
-        timer = 299;
+        timer = 179;
         timerOn = false;
         operation_StartBtn.interactable = true;
         GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(false);

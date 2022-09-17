@@ -30,7 +30,7 @@ public class Robster : MonoBehaviour
     private int transformChange;
 
     //체력관련
-    public int hp = 50;
+    public int hp = 100;
 
     //히트관련
     //public BoxCollider2D boxCollider2d;
@@ -271,11 +271,7 @@ public class Robster : MonoBehaviour
     private void Death()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
-        player.money += Random.Range(80, 100); 
-        if (Random.Range(1, 100) <= drop_Percentage)
-        {
-            ItemDatabase.instance.ItemDrop(gameObject.transform.position, 6);
-        }
+        ItemDatabase.instance.ItemDrop(gameObject.transform.position, 6);
         Destroy(gameObject);
     }
 }

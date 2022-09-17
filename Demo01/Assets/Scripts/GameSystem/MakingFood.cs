@@ -17,7 +17,7 @@ public class MakingFood : MonoBehaviour
     {
         if (GameObject.Find("CookSystem").GetComponent<CookingSystem>().timerOn && GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.Count < 5)
         {
-            /*for (int i = 0; i < inven.items.Count; i++)
+            for (int i = 0; i < inven.items.Count; i++)
             {
                 if ((inven.items[i].itemName == "Egg") && (inven.items[i].itemCount >= 1))
                 {
@@ -25,16 +25,14 @@ public class MakingFood : MonoBehaviour
                     GameObject.Find("SubCooknote").GetComponent<SubCookNote>().ClickedFoodImage = BtnFoodImage[0];
                     GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SubNoteManager("Omelet");
                 }
-            }*/
-            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().ClickedFoodImage = BtnFoodImage[0];
-            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SubNoteManager("Omelet");
+            }
         }
     }
     public void Salad() 
     {
         if (GameObject.Find("CookSystem").GetComponent<CookingSystem>().timerOn && GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.Count < 5)
         {
-            /*int temp1 = 0;
+            int temp1 = 0;
             int temp2 = 0;
             bool EqualCheck1 = false;
             bool EqualCheck2 = false;
@@ -57,9 +55,7 @@ public class MakingFood : MonoBehaviour
                 inven.RemoveItem(temp2);
                 GameObject.Find("SubCooknote").GetComponent<SubCookNote>().ClickedFoodImage = BtnFoodImage[1];
                 GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SubNoteManager("Salad");
-            }*/
-            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().ClickedFoodImage = BtnFoodImage[1];
-            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SubNoteManager("Salad");
+            }
         }
     }
     public void CornSoup()

@@ -80,7 +80,6 @@ public class EnemyMove : MonoBehaviour
         if(hp <= 0)
         {
             player = GameObject.Find("Player").GetComponent<Player>();
-            player.money += Random.Range(30, 50) ;
             ItemDatabase.instance.ItemDrop(rigid.position, 24);
             Destroy(gameObject);
         }

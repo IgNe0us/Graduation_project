@@ -287,11 +287,8 @@ public class Radish : MonoBehaviour
     private void Death()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
-        player.money += Random.Range(30, 50);
-        if (Random.Range(1, 100) <= drop_Percentage)
-        {
-            ItemDatabase.instance.ItemDrop(gameObject.transform.position, 20);
-        }
+        //player.money += Random.Range(30, 50);
+        ItemDatabase.instance.ItemDrop(gameObject.transform.position, 20);
         Destroy(gameObject);
     }
 }

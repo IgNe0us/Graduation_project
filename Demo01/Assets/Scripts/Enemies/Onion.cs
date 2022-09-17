@@ -292,11 +292,12 @@ public class Onion : MonoBehaviour
     {
 
         player = GameObject.Find("Player").GetComponent<Player>();
-        player.money += Random.Range(30, 50);
-        if (Random.Range(1, 100) <= drop_Percentage)
+        //player.money += Random.Range(30, 50);
+        /*if (Random.Range(1, 100) <= drop_Percentage)
         {
             ItemDatabase.instance.ItemDrop(gameObject.transform.position, 24);
-        }
+        }*/
+        ItemDatabase.instance.ItemDrop(gameObject.transform.position, 24);
         Destroy(gameObject);
     }
 

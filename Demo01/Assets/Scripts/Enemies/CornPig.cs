@@ -31,7 +31,7 @@ public class CornPig : MonoBehaviour
     private int transformChange;
 
     //체력관련
-    public int hp = 150;
+    public int hp = 100;
     private bool Died = false;
 
     //히트관련
@@ -270,11 +270,7 @@ public class CornPig : MonoBehaviour
     private void Death()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
-        player.money += Random.Range(80, 100);
-        if (Random.Range(1, 100) <= drop_Percentage)
-        {
-            ItemDatabase.instance.ItemDrop(gameObject.transform.position, 26);
-        }
+        ItemDatabase.instance.ItemDrop(gameObject.transform.position, 26);
         Destroy(gameObject);
     }
 }

@@ -362,6 +362,56 @@ public class Player : MonoBehaviour
             TakeDamage(5, collision.gameObject);
             PlaySound("DAMAGED");
         }
+        else if (collision.gameObject.tag == "Bird")
+        {
+            TakeDamage(6, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "Boar")
+        {
+            TakeDamage(8, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "Chicken")
+        {
+            TakeDamage(2, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "ChickenEgg")
+        {
+            TakeDamage(3, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "Fish")
+        {
+            TakeDamage(4, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "Lizard")
+        {
+            TakeDamage(4, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "Shark")
+        {
+            TakeDamage(10, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "Sheep")
+        {
+            TakeDamage(6, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "Shrimp")
+        {
+            TakeDamage(6, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
+        else if (collision.gameObject.tag == "Squid")
+        {
+            TakeDamage(6, collision.gameObject);
+            PlaySound("DAMAGED");
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

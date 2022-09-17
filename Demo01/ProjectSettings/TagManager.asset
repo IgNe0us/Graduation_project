@@ -29,6 +29,16 @@ TagManager:
   - ShopKeeper
   - SkillMaster
   - Table
+  - Bird
+  - Boar
+  - ChickenEgg
+  - Chicken
+  - Fish
+  - Lizard
+  - Shark
+  - Sheep
+  - Shrimp
+  - Squid
   layers:
   - Default
   - TransparentFX
