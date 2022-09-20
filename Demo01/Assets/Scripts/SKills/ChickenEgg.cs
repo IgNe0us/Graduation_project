@@ -21,6 +21,10 @@ public class ChickenEgg : MonoBehaviour
         {
             DestroyBullet();
         }
+        if (collision.gameObject.tag == "Platform")
+        {
+            DestroyBullet();
+        }
     }
     void DestroyBullet()
     {

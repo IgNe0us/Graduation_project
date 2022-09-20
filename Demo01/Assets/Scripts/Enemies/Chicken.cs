@@ -62,9 +62,8 @@ public class Chicken : MonoBehaviour
         TransformChange();
         Think();
         isknockback = false;
-        Invoke("ThrowEgg", 5);
+        StartCoroutine("ThrowEgg");
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -261,16 +260,17 @@ public class Chicken : MonoBehaviour
         }
     }
 
-    void ThrowEgg()
+    IEnumerator ThrowEgg()
     {
-        if(Random.Range(0,11) < 5)
+        yield return new WaitForSeconds(5.0f);
+        if (Random.Range(0,11) < 5)
         {
             _AnimState = AnimState.Throw;
             GameObject clone = Instantiate(Egg, new Vector3(transform.position.x + 1f, transform.position.y + 1f,  0), Quaternion.identity);
             clone.GetComponent<ChickenEgg>().LRCheck = lastMoveDirection;
         }
         StartCoroutine("AnimReturn");
-        Invoke("ThrowEgg", 5);
+        StartCoroutine("ThrowEgg");
     }
 
     void Think()
