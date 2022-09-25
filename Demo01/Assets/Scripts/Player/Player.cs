@@ -160,7 +160,6 @@ public class Player : MonoBehaviour
 
         //ESC 키 구현
         Esckey();
-
     }
 
     private void FixedUpdate()
@@ -226,6 +225,30 @@ public class Player : MonoBehaviour
                 //0,4의 소리를 랜덤하게 재생하여 동일하지않은 사운드를 출력하여 지루하지 않게함.
                 randomWalkSound = Random.Range(0, 4);
                 audioSource.PlayOneShot(audioForestWalk[randomWalkSound]);
+            }
+            else if ((rig.velocity.x != 0) && SceneManager.GetActiveScene().name == "Ocean")
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    //0.3은 뛰는 소리간격
+                    MoveCoolTime = 0.3f;
+                }
+                MoveCurTime = MoveCoolTime;
+                //0,4의 소리를 랜덤하게 재생하여 동일하지않은 사운드를 출력하여 지루하지 않게함.
+                randomWalkSound = Random.Range(0, 4);
+                audioSource.PlayOneShot(audioForestWalk[randomWalkSound]);
+            }
+            else if ((rig.velocity.x != 0) && SceneManager.GetActiveScene().name == "Volcano")
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    //0.3은 뛰는 소리간격
+                    MoveCoolTime = 0.3f;
+                }
+                MoveCurTime = MoveCoolTime;
+                //0,5의 소리를 랜덤하게 재생하여 동일하지않은 사운드를 출력하여 지루하지 않게함.
+                randomWalkSound = Random.Range(0, 5);
+                audioSource.PlayOneShot(audioStoneWalk[randomWalkSound]);
             }
         }
         else

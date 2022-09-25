@@ -119,6 +119,8 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
+  updateTiming: 1
+  unscaledTime: 0
   _animationName: 
   loop: 0
   timeScale: 0
@@ -163,7 +165,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46aa2006456985d42837504e4e811c50, type: 2}
   - {fileID: 11400000, guid: 6e60605cba5bc3f4d9294b85989d59ee, type: 2}
   rig: {fileID: 0}
-  hp: 150
+  hp: 100
   boxCollider2d: {fileID: 0}
   damage: 0
   damaged: {fileID: 8300000, guid: 06acd22a5568f8541b2a703f9f1a26da, type: 3}

@@ -9,15 +9,27 @@ public class MapChoice : MonoBehaviour
     public GameObject Map;
     public GameObject Player;
     public bool OceanOn = false;
+    public bool VolcanoOn = false;
+    public Sprite volcaonoUnlock;
+    public Sprite oceanUnlock;
+
+
     private void Start()
     {
         gameObject.transform.GetChild(3).gameObject.GetComponent<Button>().interactable = false;
+        gameObject.transform.GetChild(2).gameObject.GetComponent<Button>().interactable = false;
     }
     private void Update()
     {
         if (OceanOn == true)
         {
             gameObject.transform.GetChild(3).gameObject.GetComponent<Button>().interactable = true;
+            gameObject.GetComponent<Image>().sprite = oceanUnlock;
+        }
+        if(VolcanoOn == true && OceanOn == true)
+        {
+            gameObject.transform.GetChild(2).gameObject.GetComponent<Button>().interactable = true;
+            gameObject.GetComponent<Image>().sprite = volcaonoUnlock;
         }
     }
     public void Go_To_Forest()

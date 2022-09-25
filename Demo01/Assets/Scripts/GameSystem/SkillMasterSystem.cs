@@ -113,6 +113,7 @@ public class SkillMasterSystem : MonoBehaviour
                 GameObject.Find("Player").GetComponent<Player>().maxHp += 12;
                 GameObject.Find("Player").GetComponent<Player>().curHp += 12;
                 GameObject.Find("Player").GetComponent<Player>().money -= 10000;
+                GameObject.Find("MapControl").gameObject.transform.GetChild(0).gameObject.GetComponent<MapChoice>().VolcanoOn = true;
                 Upgrade_Check2 = false;
                 Upgrade_Check3 = true;
                 abilityText.text = "공격력\n25 -> 40 \n하트\n7 -> 10";

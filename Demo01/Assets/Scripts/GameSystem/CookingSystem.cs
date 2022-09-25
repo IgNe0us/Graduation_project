@@ -13,6 +13,7 @@ public class CookingSystem : MonoBehaviour
     public Button operation_StartBtn;
     public Slider CookingGagebar;
     private bool OnOffCheck;
+    bool restaurant_BackGround_On_Off_Check;
     
     int day = 0;
     float timer_sec;
@@ -37,7 +38,11 @@ public class CookingSystem : MonoBehaviour
             {
                 cookSystemManagement.transform.GetChild(i).gameObject.SetActive(false);
             }
-            GameObject.Find("Resaurant_BackGround").transform.GetChild(0).gameObject.SetActive(false);
+            if (restaurant_BackGround_On_Off_Check == true)
+            {
+                GameObject.Find("Resaurant_BackGround").transform.GetChild(0).gameObject.SetActive(false);
+            }
+            restaurant_BackGround_On_Off_Check = false;
             GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(false);
             cookingTimer.text = "0:0";
             EndOper();
@@ -50,6 +55,7 @@ public class CookingSystem : MonoBehaviour
             cookSystemManagement.transform.GetChild(5).gameObject.SetActive(true);
             cookSystemManagement.transform.GetChild(6).gameObject.SetActive(true);
             cookSystemManagement.transform.GetChild(7).gameObject.SetActive(true);
+            restaurant_BackGround_On_Off_Check = true;
             GameObject.Find("Resaurant_BackGround").transform.GetChild(0).gameObject.SetActive(true);
         }
     }
@@ -137,10 +143,13 @@ public class CookingSystem : MonoBehaviour
         timer = 179;
         timerOn = false;
         operation_StartBtn.interactable = true;
-        GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        GameObject.Find("NpcManager").gameObject.transform.GetChild(1).gameObject.SetActive(false);
-        GameObject.Find("NpcManager").gameObject.transform.GetChild(2).gameObject.SetActive(false);
-        GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(false);
+        if (timerOn == true)
+        {
+            GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find("NpcManager").gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            GameObject.Find("NpcManager").gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(false);
+        }
     }
 
 }
