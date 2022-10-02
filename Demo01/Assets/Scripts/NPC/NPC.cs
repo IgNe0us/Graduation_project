@@ -135,6 +135,7 @@ public class NPC : MonoBehaviour
                             }
                             GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
                             GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.RemoveAt(0);
+                            GameObject.Find("CookSystem").GetComponent<CookingSystem>().OperSuccess++;
                             if (GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.Count == 0)
                             {
                                 GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;
@@ -217,6 +218,7 @@ public class NPC : MonoBehaviour
                             }
                             GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
                             GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.RemoveAt(0);
+                            GameObject.Find("CookSystem").GetComponent<CookingSystem>().OperSuccess++;
                             if (GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.Count == 0)
                             {
                                 GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;
@@ -299,6 +301,7 @@ public class NPC : MonoBehaviour
                             }
                             GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
                             GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.RemoveAt(0);
+                            GameObject.Find("CookSystem").GetComponent<CookingSystem>().OperSuccess++;
                             if (GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.Count == 0)
                             {
                                 GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;
@@ -314,6 +317,7 @@ public class NPC : MonoBehaviour
                         PlaySound("Fail");
                         GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
                         GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.RemoveAt(0);
+                        GameObject.Find("CookSystem").GetComponent<CookingSystem>().OperFail++;
                         if (GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.Count == 0)
                         {
                             GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;

@@ -14,12 +14,15 @@ public class CookingSystem : MonoBehaviour
     public Slider CookingGagebar;
     private bool OnOffCheck;
     bool restaurant_BackGround_On_Off_Check;
-    
+    int calculateGold;
+    public int OperSuccess;
+    public int OperFail;    
+
     int day = 0;
     float timer_sec;
     float timer_min;
-    float timer = 179; // 타이머 게이지 확인용
-    float timer_Max = 179; // 타이머 게이지 확인용
+    float timer = 89; // 타이머 게이지 확인용
+    float timer_Max = 89; // 타이머 게이지 확인용
     public bool timerOn = false;
     private void Start()
     {
@@ -110,13 +113,18 @@ public class CookingSystem : MonoBehaviour
         {
             timer_min = 0;
             timer_sec = 0;
-            timer = 179;
+            timer = 89;
             timerOn = false;
             operation_StartBtn.interactable = true;
+            calculateGold -= GameObject.Find("Player").gameObject.GetComponent<Player>().money;
             GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("NpcManager").gameObject.transform.GetChild(1).gameObject.SetActive(false);
             GameObject.Find("NpcManager").gameObject.transform.GetChild(2).gameObject.SetActive(false);
             GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(false);
+            gameObject.transform.GetChild(0).gameObject.transform.GetChild(8).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = OperSuccess.ToString();
+            gameObject.transform.GetChild(0).gameObject.transform.GetChild(8).gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = OperFail.ToString();
+            gameObject.transform.GetChild(0).gameObject.transform.GetChild(8).gameObject.transform.GetChild(2).gameObject.GetComponent<Text>().text = Mathf.Abs(calculateGold).ToString();
+            gameObject.transform.GetChild(0).gameObject.transform.GetChild(8).gameObject.SetActive(true);
         }
         cookingDay.text = "운영 " + day.ToString() + "일 째";
         cookingTimer.text = timer_min + ":" + Mathf.Round(timer_sec).ToString();
@@ -124,9 +132,10 @@ public class CookingSystem : MonoBehaviour
     }
     public void TimerOn()
     {
-        timer = 179;
-        timer_sec = 59;
-        timer_min = 2;
+        calculateGold = GameObject.Find("Player").gameObject.GetComponent<Player>().money;
+        timer = 89;
+        timer_sec = 29;
+        timer_min = 1;
         timerOn = true;
         day++;
         operation_StartBtn.interactable = false;
@@ -140,16 +149,22 @@ public class CookingSystem : MonoBehaviour
     {
         timer_min = 0;
         timer_sec = 0;
-        timer = 179;
-        timerOn = false;
+        timer = 89;
         operation_StartBtn.interactable = true;
-        if (timerOn == true)
+        timerOn = false;
+        /*if (timerOn == true)
         {
             GameObject.Find("NpcManager").gameObject.transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("NpcManager").gameObject.transform.GetChild(1).gameObject.SetActive(false);
             GameObject.Find("NpcManager").gameObject.transform.GetChild(2).gameObject.SetActive(false);
             GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.SetActive(false);
-        }
+        }*/
     }
+
+    public void CalculateExitButton()
+    {
+        gameObject.transform.GetChild(0).gameObject.transform.GetChild(8).gameObject.SetActive(false);
+    }
+
 
 }

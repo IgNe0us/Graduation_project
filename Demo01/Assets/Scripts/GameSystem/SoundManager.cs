@@ -41,6 +41,11 @@ public class SoundManager : MonoBehaviour
             musicSource = GameObject.Find("Main Camera").gameObject.GetComponent<AudioSource>();
             musicSource.volume = volumeSave;
         }
+        else if (scene.name == "BossRoom")
+        {
+            musicSource = GameObject.Find("Main Camera").gameObject.GetComponent<AudioSource>();
+            musicSource.volume = volumeSave;
+        }
     }
 
     public void SetMusicVolumeApply()
