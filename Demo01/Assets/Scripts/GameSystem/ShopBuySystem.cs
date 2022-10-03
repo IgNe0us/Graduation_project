@@ -109,6 +109,7 @@ public class ShopBuySystem : MonoBehaviour
         }
         else
         {
+            GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().RestaurantLevel = 2;
             GameObject.Find("MapControl").gameObject.transform.GetChild(0).gameObject.GetComponent<MapChoice>().OceanOn = true;
             GameObject.Find("Player").GetComponent<Player>().money -= 3000;
             Snorkel.GetComponent<Button>().interactable = false;

@@ -128,6 +128,7 @@ public class SkillMasterSystem : MonoBehaviour
                 GameObject.Find("Player").GetComponent<Player>().maxHp += 12;
                 GameObject.Find("Player").GetComponent<Player>().curHp += 12;
                 GameObject.Find("Player").GetComponent<Player>().money -= 20000;
+                GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().RestaurantLevel = 3;
                 UpGradeComplete = true;
                 abilityText.text = "현재공격력\n40\n현재하트\n10";
                 GoldText.text = "";
