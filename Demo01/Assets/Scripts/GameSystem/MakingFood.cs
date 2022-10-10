@@ -171,7 +171,7 @@ public class MakingFood : MonoBehaviour
             bool EqualCheck3 = false;
             for (int i = 0; i < inven.items.Count; i++)
             {
-                if ((inven.items[i].itemName == "Egg") && (inven.items[i].itemCount >= 1))
+                if ((inven.items[i].itemName == "Lobster") && (inven.items[i].itemCount >= 1))
                 {
                     temp1 = i;
                     EqualCheck1 = true;
@@ -310,8 +310,12 @@ public class MakingFood : MonoBehaviour
         {
             int temp1 = 0;
             int temp2 = 0;
+            int temp3 = 0;
+            int temp4 = 0;
             bool EqualCheck1 = false;
             bool EqualCheck2 = false;
+            bool EqualCheck3 = false;
+            bool EqualCheck4 = false;
             for (int i = 0; i < inven.items.Count; i++)
             {
                 if ((inven.items[i].itemName == "FireBirdMeat") && (inven.items[i].itemCount >= 1))
@@ -319,16 +323,28 @@ public class MakingFood : MonoBehaviour
                     temp1 = i;
                     EqualCheck1 = true;
                 }
-                if ((inven.items[i].itemName == "Butter") && (inven.items[i].itemCount >= 1))
+                if ((inven.items[i].itemName == "Paprika") && (inven.items[i].itemCount >= 1))
                 {
                     temp2 = i;
                     EqualCheck2 = true;
                 }
+                if ((inven.items[i].itemName == "Onion") && (inven.items[i].itemCount >= 1))
+                {
+                    temp3 = i;
+                    EqualCheck3 = true;
+                }
+                if ((inven.items[i].itemName == "Butter") && (inven.items[i].itemCount >= 1))
+                {
+                    temp4 = i;
+                    EqualCheck4 = true;
+                }
             }
-            if ((EqualCheck1 == true) && (EqualCheck2 == true))
+            if ((EqualCheck1 == true) && (EqualCheck2 == true) && (EqualCheck3 == true) && (EqualCheck4 == true))
             {
                 inven.RemoveItem(temp1);
                 inven.RemoveItem(temp2);
+                inven.RemoveItem(temp3);
+                inven.RemoveItem(temp4);
                 GameObject.Find("SubCooknote").GetComponent<SubCookNote>().ClickedFoodImage = BtnFoodImage[9];
                 GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SubNoteManager("GrilledBird");
             }

@@ -82,6 +82,9 @@ public class Player : MonoBehaviour
     // 씬 체크
     public bool Main_Scene;
 
+    // 음식 관련
+    public int foodLevelCheck = 1;
+
 
 
     void Awake()

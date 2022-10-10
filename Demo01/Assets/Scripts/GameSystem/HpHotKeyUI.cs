@@ -11,6 +11,8 @@ public class HpHotKeyUI : MonoBehaviour
     public Text AdHpText;
     public Text EgText;
     public Item item;
+    public AudioSource Sound;
+    public AudioClip PotionSound;
 
 
     private void Start()
@@ -28,7 +30,8 @@ public class HpHotKeyUI : MonoBehaviour
             if (idx != -1)
             {
                 inven.items[idx].itemCount -= 1;
-                GameObject.Find("Player").GetComponent<Player>().curHp += 2;
+                GameObject.Find("Player").GetComponent<Player>().curHp += 4;
+                Sound.PlayOneShot(PotionSound);
                 if (inven.items[idx].itemCount < 1)
                 {
                     HotkeyUIUpdate();
@@ -47,7 +50,8 @@ public class HpHotKeyUI : MonoBehaviour
             if (idx != -1)
             {
                 inven.items[idx].itemCount -= 1;
-                GameObject.Find("Player").GetComponent<Player>().curHp += 4;
+                GameObject.Find("Player").GetComponent<Player>().curHp += 12;
+                Sound.PlayOneShot(PotionSound);
                 if (inven.items[idx].itemCount < 1)
                 {
                     HotkeyUIUpdate();
@@ -68,6 +72,7 @@ public class HpHotKeyUI : MonoBehaviour
             {
                 inven.items[idx].itemCount -= 1;
                 GameObject.Find("Player").GetComponent<Player>().curEnergy += 20;
+                Sound.PlayOneShot(PotionSound);
                 if (inven.items[idx].itemCount < 1)
                 {
                     HotkeyUIUpdate();

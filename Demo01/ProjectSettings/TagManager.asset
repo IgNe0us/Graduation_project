@@ -39,6 +39,8 @@ TagManager:
   - Sheep
   - Shrimp
   - Squid
+  - Dragon
+  - DragonFoot
   layers:
   - Default
   - TransparentFX

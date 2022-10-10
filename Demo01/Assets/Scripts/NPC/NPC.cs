@@ -20,7 +20,9 @@ public class NPC : MonoBehaviour
     public AudioClip Failserving;
     AudioSource ServingSound;
 
-    int RestaurantLevelCheck;
+    int foodLevel;
+    int StackRestaurantLevel;
+
 
     public enum AnimState
     {
@@ -32,12 +34,13 @@ public class NPC : MonoBehaviour
 
     void Start()
     {
+        foodLevel = GameObject.Find("Player").GetComponent<Player>().foodLevelCheck;
         ColliderCheck = false;
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         ServingSound = GetComponent<AudioSource>();
         Move = true;
         _AnimState = AnimState.Walk;
-        RestaurantLevelCheck = GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().RestaurantLevel;
+        StackRestaurantLevel = GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().StackRestaurantLevel;
     }
 
     private void Update()
@@ -61,242 +64,76 @@ public class NPC : MonoBehaviour
                 {
                     if (CurFoodName == GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem[0])
                     {
-                        if (GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().RestaurantLevel == 1)
+                        if (GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().StackRestaurantLevel == 1)
                         {
                             if (CurFoodName == "Omelet")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 50;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "Salad")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 120;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "CornSoup")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 250;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "PanCake")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 320;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "GrilledLopster")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 270;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "SquidSpaghetti")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 350;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "SteamedSharkfin")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 170;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "TunaStake")
                             {
                                 GameObject.Find("Player").GetComponent<Player>().money += 150;
                                 PlaySound("Clear");
                             }
-                            else if (CurFoodName == "GrilledShrimp")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 210;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "GrilledBird")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 450;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "SheepStake")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 280;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "PorkChop")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 480;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "GrilledLizardTail")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 250;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "DragonStake")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 800;
-                                PlaySound("Clear");
-                            }
-                            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
-                            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.RemoveAt(0);
-                            GameObject.Find("CookSystem").GetComponent<CookingSystem>().OperSuccess++;
-                            if (GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.Count == 0)
-                            {
-                                GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;
-                            }
-                            GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave[0];
-                            CancelInvoke("ThinkFood1");
-                            InvokeRepeating("ThinkFood1", 0f, 20.0f);
-                        }
-                        else if (GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().RestaurantLevel == 2)
-                        {
-                            if (CurFoodName == "Omelet")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 70;
-                                PlaySound("Clear");
-                            }
                             else if (CurFoodName == "Salad")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 140;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "CornSoup")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 270;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "PanCake")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 340;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "GrilledLopster")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 290;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "SquidSpaghetti")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 370;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "SteamedSharkfin")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 190;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "TunaStake")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 170;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "GrilledShrimp")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 230;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "GrilledBird")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 470;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "SheepStake")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 300;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "PorkChop")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 500;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "GrilledLizardTail")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 270;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "DragonStake")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 820;
-                                PlaySound("Clear");
-                            }
-                            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
-                            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.RemoveAt(0);
-                            GameObject.Find("CookSystem").GetComponent<CookingSystem>().OperSuccess++;
-                            if (GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.Count == 0)
-                            {
-                                GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;
-                            }
-                            GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave[0];
-                            CancelInvoke("ThinkFood2");
-                            InvokeRepeating("ThinkFood2", 0f, 20.0f);
-                        }
-                        else if (GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().RestaurantLevel == 3)
-                        {
-                            if (CurFoodName == "Omelet")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 100;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "Salad")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 170;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "CornSoup")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 300;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "PanCake")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 370;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "GrilledLopster")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 320;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "SquidSpaghetti")
-                            {
-                                GameObject.Find("Player").GetComponent<Player>().money += 400;
-                                PlaySound("Clear");
-                            }
-                            else if (CurFoodName == "SteamedSharkfin")
                             {
                                 GameObject.Find("Player").GetComponent<Player>().money += 220;
                                 PlaySound("Clear");
                             }
+                            else if (CurFoodName == "CornSoup")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 350;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "PanCake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 420;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledLopster")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 370;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "SquidSpaghetti")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 450;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "SteamedSharkfin")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 270;
+                                PlaySound("Clear");
+                            }
                             else if (CurFoodName == "TunaStake")
                             {
-                                GameObject.Find("Player").GetComponent<Player>().money += 200;
+                                GameObject.Find("Player").GetComponent<Player>().money += 250;
                                 PlaySound("Clear");
                             }
                             else if (CurFoodName == "GrilledShrimp")
                             {
-                                GameObject.Find("Player").GetComponent<Player>().money += 260;
+                                GameObject.Find("Player").GetComponent<Player>().money += 310;
                                 PlaySound("Clear");
                             }
                             else if (CurFoodName == "GrilledBird")
                             {
-                                GameObject.Find("Player").GetComponent<Player>().money += 500;
+                                GameObject.Find("Player").GetComponent<Player>().money += 550;
                                 PlaySound("Clear");
                             }
                             else if (CurFoodName == "SheepStake")
                             {
-                                GameObject.Find("Player").GetComponent<Player>().money += 330;
+                                GameObject.Find("Player").GetComponent<Player>().money += 380;
                                 PlaySound("Clear");
                             }
                             else if (CurFoodName == "PorkChop")
                             {
-                                GameObject.Find("Player").GetComponent<Player>().money += 530;
+                                GameObject.Find("Player").GetComponent<Player>().money += 580;
                                 PlaySound("Clear");
                             }
                             else if (CurFoodName == "GrilledLizardTail")
                             {
-                                GameObject.Find("Player").GetComponent<Player>().money += 300;
+                                GameObject.Find("Player").GetComponent<Player>().money += 350;
                                 PlaySound("Clear");
                             }
                             else if (CurFoodName == "DragonStake")
                             {
-                                GameObject.Find("Player").GetComponent<Player>().money += 850;
+                                GameObject.Find("Player").GetComponent<Player>().money += 900;
                                 PlaySound("Clear");
                             }
                             GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
@@ -307,8 +144,213 @@ public class NPC : MonoBehaviour
                                 GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;
                             }
                             GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave[0];
-                            CancelInvoke("ThinkFood3");
-                            InvokeRepeating("ThinkFood3", 0f, 20.0f);
+                            if (foodLevel == 1)
+                            {
+                                CancelInvoke("ThinkFood1");
+                                InvokeRepeating("ThinkFood1", 0f, 20.0f);
+                            }
+                            else if (foodLevel == 2)
+                            {
+                                CancelInvoke("ThinkFood2");
+                                InvokeRepeating("ThinkFood2", 0f, 20.0f);
+                            }
+                            else if (foodLevel == 3)
+                            {
+                                CancelInvoke("ThinkFood3");
+                                InvokeRepeating("ThinkFood3", 0f, 20.0f);
+                            }
+                        }
+                        else if (GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().StackRestaurantLevel == 2)
+                        {
+                            if (CurFoodName == "Omelet")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 200;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "Salad")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 270;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "CornSoup")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 400;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "PanCake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 470;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledLopster")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 420;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "SquidSpaghetti")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 500;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "SteamedSharkfin")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 320;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "TunaStake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 300;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledShrimp")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 360;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledBird")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 600;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "SheepStake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 430;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "PorkChop")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 630;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledLizardTail")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 400;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "DragonStake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 950;
+                                PlaySound("Clear");
+                            }
+                            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
+                            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.RemoveAt(0);
+                            GameObject.Find("CookSystem").GetComponent<CookingSystem>().OperSuccess++;
+                            if (GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.Count == 0)
+                            {
+                                GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;
+                            }
+                            GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave[0];
+                            if (foodLevel == 1)
+                            {
+                                CancelInvoke("ThinkFood1");
+                                InvokeRepeating("ThinkFood1", 0f, 20.0f);
+                            }
+                            else if (foodLevel == 2)
+                            {
+                                CancelInvoke("ThinkFood2");
+                                InvokeRepeating("ThinkFood2", 0f, 20.0f);
+                            }
+                            else if (foodLevel == 3)
+                            {
+                                CancelInvoke("ThinkFood3");
+                                InvokeRepeating("ThinkFood3", 0f, 20.0f);
+                            }
+                        }
+                        else if (GameObject.Find("RestaurantUpgradeManual").GetComponent<RestaurantUpgradeSystem>().StackRestaurantLevel == 3)
+                        {
+                            if (CurFoodName == "Omelet")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 250;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "Salad")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 320;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "CornSoup")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 450;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "PanCake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 520;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledLopster")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 470;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "SquidSpaghetti")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 550;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "SteamedSharkfin")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 370;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "TunaStake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 350;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledShrimp")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 410;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledBird")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 650;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "SheepStake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 480;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "PorkChop")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 680;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "GrilledLizardTail")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 450;
+                                PlaySound("Clear");
+                            }
+                            else if (CurFoodName == "DragonStake")
+                            {
+                                GameObject.Find("Player").GetComponent<Player>().money += 1000;
+                                PlaySound("Clear");
+                            }
+                            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().MadeItem.RemoveAt(0);
+                            GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.RemoveAt(0);
+                            GameObject.Find("CookSystem").GetComponent<CookingSystem>().OperSuccess++;
+                            if (GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave.Count == 0)
+                            {
+                                GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = null;
+                            }
+                            GameObject.Find("Player").gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.Find("SubCooknote").GetComponent<SubCookNote>().SpriteSave[0];
+                            if (foodLevel == 1)
+                            {
+                                CancelInvoke("ThinkFood1");
+                                InvokeRepeating("ThinkFood1", 0f, 20.0f);
+                            }
+                            else if (foodLevel == 2)
+                            {
+                                CancelInvoke("ThinkFood2");
+                                InvokeRepeating("ThinkFood2", 0f, 20.0f);
+                            }
+                            else if (foodLevel == 3)
+                            {
+                                CancelInvoke("ThinkFood3");
+                                InvokeRepeating("ThinkFood3", 0f, 20.0f);
+                            }
                         }
                     }
                     else
@@ -372,15 +414,15 @@ public class NPC : MonoBehaviour
         {
             Move = false;
             StartCoroutine("AnimReturn");
-            if (RestaurantLevelCheck == 1)
+            if (foodLevel == 1)
             {
                 InvokeRepeating("ThinkFood1", 0f, 20.0f);
             }
-            else if (RestaurantLevelCheck == 2)
+            else if (foodLevel == 2)
             {
                 InvokeRepeating("ThinkFood2", 0f, 20.0f);
             }
-            else if (RestaurantLevelCheck == 2)
+            else if (foodLevel == 3)
             {
                 InvokeRepeating("ThinkFood3", 0f, 20.0f);
             }

@@ -1,0 +1,15 @@
+lightning.png
+size:1642,645
+filter:Linear,Linear
+pma:true
+lightning/skeleton_2
+bounds:2,2,1638,641
+offsets:2,2,1642,645
+
+lightning_2.png
+size:2463,2524
+filter:Linear,Linear
+pma:true
+lightning/skeleton
+bounds:2,2,2459,2520
+offsets:2,2,2463,2524

@@ -10,8 +10,15 @@ public class TransferMap : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            GameObject.Find("FadeControl").GetComponent<FadeControl>().FadeStart();
-            Invoke("SceneLoad", 1.3f);
+            if(transferMapName == "Main" && GameObject.Find("CookSystem").GetComponent<CookingSystem>().timerOn == true)
+            {
+                return;
+            }
+            else
+            {
+                GameObject.Find("FadeControl").GetComponent<FadeControl>().FadeStart();
+                Invoke("SceneLoad", 1.3f);
+            }
         }
     }
 
@@ -24,6 +31,10 @@ public class TransferMap : MonoBehaviour
         }
         else
         {
+            if(transferMapName == "Main" && GameObject.Find("CookSystem").GetComponent<CookingSystem>().timerOn == true)
+            {
+                return;
+            }
             SceneManager.LoadScene(transferMapName);
         }   
     }

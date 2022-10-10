@@ -1,0 +1,16 @@
+skeleton.png
+size:2032,686
+filter:Linear,Linear
+pma:true
+dragon_arm
+bounds:1522,90,594,508
+offsets:549,95,1600,1200
+rotate:90
+dragon_arm2
+bounds:2,2,682,932
+offsets:859,199,1600,1200
+rotate:90
+dragon_hand
+bounds:936,61,623,584
+offsets:53,30,1600,1200
+rotate:90

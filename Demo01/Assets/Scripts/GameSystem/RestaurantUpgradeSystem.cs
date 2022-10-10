@@ -21,6 +21,7 @@ public class RestaurantUpgradeSystem : MonoBehaviour
 
     // 분기점 업데이트
     public int RestaurantLevel;
+    public int StackRestaurantLevel = 1;
     public bool SelectedRestaurant1;
     public bool SelectedRestaurant2;
     public bool SelectedRestaurant3;
@@ -138,6 +139,7 @@ public class RestaurantUpgradeSystem : MonoBehaviour
             Lv2_final_Obj.SetActive(true);
             GameObject.Find("Player").GetComponent<Player>().money -= 7000;
             Lv2_B.SetActive(false); // 묻는 창 종료
+            StackRestaurantLevel = 2;
         }
         Lv2_B.SetActive(false); // 묻는 창 종료
     }
@@ -188,6 +190,7 @@ public class RestaurantUpgradeSystem : MonoBehaviour
             Lv3_final_Obj.SetActive(true);
             GameObject.Find("Player").GetComponent<Player>().money -= 50000;
             Lv3_B.SetActive(false); // 묻는 창 종료
+            StackRestaurantLevel = 3;
         }
         Lv3_B.SetActive(false); // 묻는 창 종료
     }
